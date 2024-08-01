@@ -1,0 +1,20 @@
+vite =>
+
+1. Fast 
+2. Bundling is fast
+
+1. npm create vite@latest auth-app
+2. cd auth-app
+3. npm install
+4. npm run dev
+
+
+type script is a programming language. JS but typed JS. TypeScript is a syntactic superset of JavaScript which adds static typing.
+
+This basically means that TypeScript adds syntax on top of JavaScript, allowing developers to add types.
+
+TypeScript being a "Syntactic Superset" means that it shares the same base syntax as JavaScript, but adds something to it.
+
+types => all + any
+
+react is for developers mostly
