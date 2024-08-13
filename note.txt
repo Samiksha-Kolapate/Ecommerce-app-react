@@ -18,3 +18,80 @@ TypeScript being a "Syntactic Superset" means that it shares the same base synta
 types => all + any
 
 react is for developers mostly
+
+
+axios
+material ui / tailwind
+localstorage
+react router
+
+container => all components will be load
+atomic principle
+store will be wrap in container
+
+component to container => container to pages
+
+redux manages global level state
+
+if added to cart => state will be component level
+so redux
+ so store => store will be in index.js
+
+ cart component in store
+
+reusable component
+
+
+pages in route 
+
+
+product pages
+cart
+wishlist
+Login
+SignUp
+productdetails
+
+
+
+react-helmet => for seo
+npm install -D tailwindcss postcss autoprefixer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+I am not getting correct output, after clicking on add to cart at first console gives empty array and after second add to cart its showing previous item added to cart, output as follows =>>[]length: 0[[Prototype]]: Array(0)
+Product.jsx:27 [{…}]0: {id: 3, title: 'Mens Cotton Jacket', price: 55.99, description: 'great outerwear jackets for Spring/Autumn/Winter, …and or son in this thanksgiving or Christmas Day.', category: "men's clothing", …}length: 1[[Prototype]]: Array(0)
+Product.jsx:27 (2) [{…}, {…}]0: {id: 3, title: 'Mens Cotton Jacket', price: 55.99, description: 'great outerwear jackets for Spring/Autumn/Winter, …and or son in this thanksgiving or Christmas Day.', category: "men's clothing", …}1: {id: 3, title: 'Mens Cotton Jacket', price: 55.99, description: 'great outerwear jackets for Spring/Autumn/Winter, …and or son in this thanksgiving or Christmas Day.', category: "men's clothing", …}length: 2[[Prototype]]: Array(0)
+
+The issue you're encountering is related to how the setState function works in React. When you call setCart, the cart state isn't updated immediately, so when you log it right after calling setCart, you see the previous state instead of the current one.
+
+Here’s how you can address this:
+
+Update the handleAddToCart Function
+Instead of directly updating the cart state with the previous cart array, you can use the functional form of setState, which ensures you're working with the latest state.
+
+function handleAddToCart(product) {
+    setCart(prevCart => {
+        const updatedCart = [...prevCart, product];
+        console.log(updatedCart); // This will now show the correct cart content
+        return updatedCart;
+    });
+}
+
+
+Explanation:
+Functional setState: By using the functional form setCart(prevCart => ...), you ensure that the latest state (prevCart) is used when updating the cart state. This avoids issues with stale state when you have multiple rapid state updates.
+
+Console Logging: The console.log(updatedCart) will now correctly log the cart's state after the product is added.

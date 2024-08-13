@@ -1,25 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Signup from './components/Signup.jsx'
-import Login from './components/Login.jsx'
-import './App.css'
+import { Routes, Route } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+import Product from "./pages/Product";
+import Cart from "./pages/Cart";
+import { useState } from "react";
+import Wishlist from "./pages/Wishlist";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [cart, setCart] = useState([]);
+    const [wishlist,setWishlist] = useState([]);
 
-  return (
-    <>
-      <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
-      </BrowserRouter>
-      
-    </>
-  )
+    return (
+        <>
+            <Routes>
+                <Route path="/" element={
+                    <Product 
+                    cart={cart} 
+                    setCart={setCart} 
+                    wishlist= {wishlist} 
+                    setWishlist={setWishlist} />
+                    } />
+                <Route path="/cart" element={<Cart cart={cart} />} />
+                <Route path="/wishlist" element={<Wishlist wishlist={wishlist}/>} />
+            </Routes>
+        </>
+    );
 }
 
 export default App;
