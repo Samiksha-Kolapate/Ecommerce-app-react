@@ -2,45 +2,40 @@ import React from 'react'
 import { FaHeart } from 'react-icons/fa';
 import { useState, useEffect} from 'react';
 
+
 const ProductCard = (props) => {
     const { product, index, handleAddToCart, handleAddToWishlist,wishlist } = props;
 
     const [isInWishlist, setIsInWishlist] = useState(false);
     
     useEffect(() => {
-        const isProductInWishlist = wishlist.some(wishlistItem => product.id === wishlistItem.id);
+        let isProductInWishlist = false;
+        if(wishlist){
+            isProductInWishlist = wishlist.some(wishlistItem => product.id === wishlistItem.id);
+        }
         setIsInWishlist(isProductInWishlist);
-    }, [wishlist, product.id]);
-
+    }, [wishlist]);   // on updation it should go in wishlist;;; color changes gray to red ;; red to gray compoment did update
 
     const handleWishlistClick = () => {
         handleAddToWishlist(product);
     };
-
      
     return (
         <>
             <div className="card m-2 p-3 position-relative" >
                 <img
-                    src={product.image}
+                    src={product.images}
                     className="card-img-top"
                     alt={product.title}
                 />
 
-                <div className="wishlist-icon position-absolute top-0 end-0 m-2">
+                <div className="wishlist-icon position-absolute top-0 end-0 m-2 p-3">
                     <FaHeart
                         onClick={handleWishlistClick}
-                        style={{ color: isInWishlist ? 'red' : 'gray', cursor: 'pointer' }}
+                       style={{ color: isInWishlist ? 'red' : 'black', cursor: 'pointer' }}
                     />
                 </div>
-                {/* <button
-                    className="position-absolute top-0 end-0 p-2"
-                    style={{ background: 'transparent', border: 'none' }}
-                    onClick={() => handleAddToWishlist(product)}
-                >
-                    <FaHeart style={{ color: 'red', fontSize: '24px' }} />
-                </button> */}
-
+                
                 <div className="card-body">
                     <div className="card-name-price">
                         <h5 className="card-title">{product.title}</h5>

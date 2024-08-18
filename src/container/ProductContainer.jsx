@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import ProductList from "../components/ProductList.jsx";
 
 class ProductContainer extends React.Component {
@@ -53,7 +53,7 @@ class ProductContainer extends React.Component {
 
                     <div>
                         <ProductList products={products} handleAddToCart={this.handleAddToCart} />
-                        {/* <Header products={products} handleAddToCart={this.handleAddToCart} /> */}
+                        <Header products={products} handleAddToCart={this.handleAddToCart} />
                     </div>
                 </div>
             </>
@@ -62,4 +62,4 @@ class ProductContainer extends React.Component {
 }
 
 
-export default ProductContainer; 
+export default ProductContainer;  */

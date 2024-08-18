@@ -2,10 +2,14 @@
 import React from 'react';
 import ProductCard from '../components/ProductCard';
 import Layout from '../components/Layout/Layout';
+import Metapage from '../components/Layout/Metapage';
 
 const Cart = ({ cart }) => {
+    console.log('Cart contents:', cart);  // Debugging line
+    
     return (
-        <Layout title={"My Cart"}>
+        <>
+         <Metapage title={"My Cart"}>
             <div className="container mt-4">
                 <h2>Your Cart</h2>
                 <div className="d-flex flex-wrap">
@@ -18,7 +22,8 @@ const Cart = ({ cart }) => {
                     )}
                 </div>
             </div>
-        </Layout>
+        </Metapage>
+        </>
     );
 }
 

@@ -8,12 +8,12 @@ import { FaHeart } from 'react-icons/fa';
 
 const Header = (props) => {
 
-   const { cartCount,wishlistCount} = props;
+    const { cart, wishlist, isAuthenticated, onLogout } = props;
 
-
-  return (
-    <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+   
+    return (
+        <>
+            <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon" />
@@ -27,35 +27,44 @@ const Header = (props) => {
                             <li className="nav-item">
                                 <NavLink to="/" className="nav-link">Home</NavLink>
                             </li>
-                            <li className="nav-item">
-                                <NavLink to="/signup" className="nav-link">SignUp</NavLink>
-                            </li>
+                            {!isAuthenticated ? (
+                                <>
+                                    <li className="nav-item">
+                                        <NavLink to="/signup" className="nav-link">SignUp</NavLink>
+                                    </li>
 
-                            <li className="nav-item">
-                                <NavLink to="/login" className="nav-link">Login</NavLink>
-                            </li>
+                                    <li className="nav-item">
+                                        <NavLink to="/login" className="nav-link">Login</NavLink>
+                                    </li>
+                                </>
+
+                            ) : (
+                                <li className="nav-item">
+                                    <button className="nav-link btn btn-link" onClick={onLogout}>Logout</button>
+                                </li>
+                            )}
 
                             <li className="nav-item">
                                 <NavLink to="/wishlist" className="nav-link">
-                                < FaHeart />
-                                <sup>
-                                    
-                                    {wishlistCount > 0 && (
-                                        <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info">{wishlistCount}</span>
-                                    )}
-                                </sup>
+                                    < FaHeart style={{ fontSize: '24px' }} />
+                                    <sup>
+
+                                        {wishlist.length > 0 && (
+                                            <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info">{wishlist.length}</span>
+                                        )}
+                                    </sup>
                                 </NavLink>
                             </li>
 
                             <li className="nav-item">
                                 <NavLink to="/cart" className="nav-link">
-                                <PiShoppingCartBold style={{ fontSize: '24px' }} />
-                                <sup>
-                                    
-                                    {cartCount > 0 && (
-                                        <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info">{cartCount}</span>
-                                    )}
-                                </sup>
+                                    <PiShoppingCartBold style={{ fontSize: '24px' }} />
+                                    <sup>
+
+                                        {cart.length > 0 && (
+                                            <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info">{cart.length}</span>
+                                        )}
+                                    </sup>
                                 </NavLink>
                             </li>
                         </ul>
@@ -64,8 +73,8 @@ const Header = (props) => {
                 </div>
             </nav>
 
-    </>
-  )
+        </>
+    )
 }
 
 export default Header

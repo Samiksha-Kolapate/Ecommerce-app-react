@@ -1,33 +1,35 @@
 import React from 'react';
-import {Helmet} from "react-helmet";
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import Header from './Header';
-// import Footer from './Footer';
+import Footer from './Footer';
+import { Toaster } from 'react-hot-toast';
+// import { ToastContainer, toast } from 'react-toastify';
 
-const Layout = ({ children,title,description,keywords,author}) => {
+
+const Layout = ({ cart,wishlist}) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleLogout = () => {
+    // Implement your logout logic here
+    setIsAuthenticated(false);
+  };
+
   return (
     <div>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <meta name="description" content={description} />
-        <meta name="keywords" content={keywords} />
-        <meta name="author" content={author} />
-        <title>{title}</title>
-      </Helmet>
-      <Header/>
+      <Header cart={cart} 
+              wishlist={wishlist} 
+              isAuthenticated={isAuthenticated} 
+              onLogout={handleLogout}/>
       <main style={{ minHeight:'70vh '}}>
-        {children}
+        <Toaster />
+        <Outlet />
       </main>
-      {/* <Footer/> */}
+      <Footer/>
     </div>
   );
 };
 
-Layout.defaultProps = {
-  title: 'eShopping - shop now',
-  description: 'Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - eShopping.in',
-  keywords: 'mern,react,node,mongoDB',
-  author: 'Samiksha',
-};
 
 
 

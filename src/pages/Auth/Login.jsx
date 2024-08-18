@@ -1,82 +1,92 @@
 import React, { useState } from 'react'
-import Layout from '../../components/Layout/Layout'
+import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useNavigate, useLocation } from 'react-router-dom';     // hook
 import "../../styles/AuthStyles.css";
-
-
-const Login = () => {
-
-    const [username, setName] = useState("");                //getter,setter
-    const [password, setPassword] = useState("");                //getter,setter
+import Metapage from '../../components/Layout/Metapage';
 
 
 
+const Login = ({setIsAuthenticated}) => {
+    const [formData, setFormData] = useState({
+        email:'',
+        password:''
+    });
 
-    //form function
-    const handleSubmit = async (e) => {                        // TARGETTING EVENT
-        e.preventDefault();                                // by preventing default will not refresh and single page app will stay as it is
-        
+    const [error, setError] = useState(null); 
+    const navigate = useNavigate();
+    
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();             // by preventing default will not refresh and single page app will stay as it is
+
         try {
-            const res = await fetch('https://fakestoreapi.com/auth/login', {
-                method: 'POST',
-                body: JSON.stringify({
-                    username: "mor_2314",
-                    password: "83r5^_"
-                })
-            })
-                .then(res => res.json())
-                .then(json => console.log(json));
-            
+            // Replace with your login API endpoint
+            const response = await axios.post('https://api.escuelajs.co/api/v1/auth/login', {
+                email: formData.email,
+                password: formData.password,
+            });
 
-        } catch (error) {
-            console.log(error);
+            // Store the token or handle the response as needed
+            localStorage.setItem('token', response.data.access_token);
+            setIsAuthenticated(true);
+            toast.success('Login successful');
+            navigate('/');
+        }  catch (err) {
+            const errorMessage = err.response?.data?.message || 'An error occurred';
+            
+            if (errorMessage.toLowerCase().includes("user not found")) {
+                toast.error('User not registered. Redirecting to signup...');
+                setTimeout(() => {
+                    navigate('/signup'); // Redirect to signup page after showing the error message
+                }, 2000);
+            } else {
+                toast.error('Invalid email or password. Please try again.');
+            }
+    
+            setError(errorMessage);
         }
-    }
+    };
 
     return (
-        <Layout title="Login e-shopping app">
+        <Metapage title="Login e-shopping">
             <div className="form-container">
                 <form onSubmit={handleSubmit}>                        
                     <h4 className="title">Login</h4>
 
                     <div className="mb-3">
-                        <input type="text"
-                            value={username}
-                            onChange={(e) => setName(e.target.value)}
+                        <input type="email"
+                            name='email'
+                            value={formData.email}
+                            onChange={handleChange}
                             className="form-control"
-                            id="username"
-                            placeholder='Enter Your Name'
+                            placeholder='Enter Your Email'
                             required />
                     </div>
 
                     <div className="mb-3">
                         <input type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            name='password'
+                            value={formData.password}
+                            onChange={handleChange}
                             className="form-control"
-                            id="exampleInputPassword1"
                             placeholder='Enter Your Password'
                             required />
                     </div>
-                    <div className="mb-3">
-                        <button
-                            type="button"
-                            className="btn forgot-btn"
-                            onClick={() => {
-                                navigate("/forgot-password");
-                            }}
-                        >
-                            Forgot Password
-                        </button>
-                    </div>
-
+                  
                     <button type="submit" className="btn btn-primary">
                         LOGIN
                     </button>
                 </form>
 
             </div>
-        </Layout>
+        </Metapage>
     );
 };
 

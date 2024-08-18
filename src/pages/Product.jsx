@@ -1,37 +1,47 @@
 import React, { useState, useEffect } from "react";
 import '../styles/Product.css'
+import Metapage from "../components/Layout/Metapage";
 import ProductCard from "../components/ProductCard";
-import Header from "../components/Layout/Header";
+import axios from "axios";
+import toast from "react-hot-toast";
+// import { toast } from 'react-toastify';
 
 
-const Product = ({ cart, setCart, wishlist, setWishlist }) => {
+
+const Product = ({ cart, setCart, wishlist, setWishlist, isAuthenticated, handleLoginRedirect }) => {
     const [products, setProducts] = useState([]);
-    // const [cartCount, setCartcount] = useState();
-    // const [wishlistCount, setWishlistcount] = useState(wishlistCount.length);
-    // const [wishlist, setWishlist] = useState([]);
-    // const [cart, setCart] = useState([]);
 
-    // console.log(cart);          //loop 
+    const getAllProducts = async () =>{
+        try{
+            const {data} = await axios.get('https://api.escuelajs.co/api/v1/products');
+            setProducts(data.slice(1));  // not getting image  sliced first elt
+        }
+        catch(error){
+            toast.error("something went wrong")
+        }
+    };
 
+    
     useEffect(() => {
-        fetch('https://fakestoreapi.com/products')
-            .then(res => res.json())
-            .then(data => setProducts(data));
-    }, []);
+        getAllProducts();
+     }, []);
 
     const handleAddToCart = (product) => {
+        if (!isAuthenticated) {
+            handleLoginRedirect();
+            return;
+        }
+
         setCart(prevCart => {
 
             const isProductInCart = prevCart.some(cartItem => product.id === cartItem.id);
 
             if (isProductInCart) {
-                alert(product.title + "Product already in cart");
+                toast.error(product.title + "Product already in cart");
                 return prevCart;
             }
             else {
                 const updatedCart = [...prevCart, product];
-                console.log(updatedCart);
-                // setCartcount(cartCount + 1);
                 return updatedCart;
             }
         });
@@ -39,32 +49,30 @@ const Product = ({ cart, setCart, wishlist, setWishlist }) => {
     }
 
     const handleAddToWishlist = (product) => {
+        if (!isAuthenticated) {
+            handleLoginRedirect();
+            return;
+        }
+
         setWishlist(prevWishlist => {
             const isProductInWishlist = prevWishlist.some(wishlistItem => product.id === wishlistItem.id);
-
             if (isProductInWishlist) {
-                return prevWishlist.filter(wishlistItem => product.id !== wishlistItem.id);
-            }
-            else {
-                const updatedWishlist = [...prevWishlist, product];
-
-                // wishlistCount ? setWishlistcount(wishlistCount - 1) : setWishlistcount(wishlistCount+1);
-                return updatedWishlist;
+                return prevWishlist.filter(wishlistItem => wishlistItem.id !== product.id);
+            } else {
+                return [...prevWishlist, product];
             }
         });
-    }
+    };
 
     return (
         <>
-            <Header cartCount={cart.length}/*  wishlistCount={wishlistCount}  */ />
-
-            <div>
+            <Metapage title="Home - eShopping">
                 <div className="container-fluid row mt-3 home-page">
                     <div className="col-md-12 ">
                         <h1 className="text-center">All Products</h1>
                         <div className="d-flex flex-wrap">
                             {
-                                products.map((product, index) => {
+                                products?.map((product, index) => {
                                     return (
                                         <ProductCard 
                                             key={`${product.id}-${index}`}
@@ -81,7 +89,8 @@ const Product = ({ cart, setCart, wishlist, setWishlist }) => {
                     </div>
                 </div>
 
-            </div>
+            </ Metapage>
+
         </>
     )
 }
