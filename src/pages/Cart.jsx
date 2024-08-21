@@ -1,6 +1,6 @@
 // Cart.jsx
 import React from 'react';
-import ProductCard from '../components/ProductCard';
+import ProductCard from '../container/ProductCard';
 import Layout from '../components/Layout/Layout';
 import Metapage from '../components/Layout/Metapage';
 

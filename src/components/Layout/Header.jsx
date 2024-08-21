@@ -1,5 +1,6 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import logo from '/images/logo.png'
 import { PiShoppingCartBold } from "react-icons/pi";
 import { FaHeart } from 'react-icons/fa';
@@ -8,9 +9,26 @@ import { FaHeart } from 'react-icons/fa';
 
 const Header = (props) => {
 
-    const { cart, wishlist, isAuthenticated, onLogout } = props;
+    const { cart, wishlist, isAuthenticated, setIsAuthenticated } = props;
 
-   
+    // const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const navigate = useNavigate();
+
+
+  /*   useEffect(() => {
+        const token = localStorage.getItem('token');
+        setIsAuthenticated(!!token);
+    }, []); */
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+        // window.location.href = '/login';
+        navigate('/login');
+    };
+
+
+
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -27,8 +45,41 @@ const Header = (props) => {
                             <li className="nav-item">
                                 <NavLink to="/" className="nav-link">Home</NavLink>
                             </li>
-                            {!isAuthenticated ? (
+
+                            {isAuthenticated ? (
                                 <>
+
+                                    <li className="nav-item">
+                                        <NavLink to="/wishlist" className="nav-link">
+                                            < FaHeart style={{ fontSize: '24px' }} />
+                                            <sup>
+
+                                                {wishlist.length > 0 && (
+                                                    <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info">{wishlist.length}</span>
+                                                )}
+                                            </sup>
+                                        </NavLink>
+                                    </li>
+
+                                    <li className="nav-item">
+                                        <NavLink to="/cart" className="nav-link">
+                                            <PiShoppingCartBold style={{ fontSize: '24px' }} />
+                                            <sup>
+                                                
+                                                {cart.length > 0 && (
+                                                    <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info">{localStorage.getItem("cartlength")}</span>
+                                                )}
+                                            </sup>
+                                        </NavLink>
+                                    </li>
+
+                                    <li className="nav-item">
+                                        <button className="nav-link btn" onClick={handleLogout}>Logout</button>
+                                    </li>
+                                </>
+                            ) : (
+                                <>                                  
+
                                     <li className="nav-item">
                                         <NavLink to="/signup" className="nav-link">SignUp</NavLink>
                                     </li>
@@ -36,37 +87,13 @@ const Header = (props) => {
                                     <li className="nav-item">
                                         <NavLink to="/login" className="nav-link">Login</NavLink>
                                     </li>
-                                </>
 
-                            ) : (
-                                <li className="nav-item">
-                                    <button className="nav-link btn btn-link" onClick={onLogout}>Logout</button>
-                                </li>
+                                </>
                             )}
 
-                            <li className="nav-item">
-                                <NavLink to="/wishlist" className="nav-link">
-                                    < FaHeart style={{ fontSize: '24px' }} />
-                                    <sup>
 
-                                        {wishlist.length > 0 && (
-                                            <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info">{wishlist.length}</span>
-                                        )}
-                                    </sup>
-                                </NavLink>
-                            </li>
 
-                            <li className="nav-item">
-                                <NavLink to="/cart" className="nav-link">
-                                    <PiShoppingCartBold style={{ fontSize: '24px' }} />
-                                    <sup>
 
-                                        {cart.length > 0 && (
-                                            <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info">{cart.length}</span>
-                                        )}
-                                    </sup>
-                                </NavLink>
-                            </li>
                         </ul>
 
                     </div>

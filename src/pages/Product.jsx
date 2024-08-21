@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../styles/Product.css'
 import Metapage from "../components/Layout/Metapage";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../container/ProductCard";
 import axios from "axios";
 import toast from "react-hot-toast";
 // import { toast } from 'react-toastify';
@@ -14,7 +14,7 @@ const Product = ({ cart, setCart, wishlist, setWishlist, isAuthenticated, handle
     const getAllProducts = async () =>{
         try{
             const {data} = await axios.get('https://api.escuelajs.co/api/v1/products');
-            setProducts(data.slice(1));  // not getting image  sliced first elt
+            setProducts(data);  // not getting image  sliced first elt
         }
         catch(error){
             toast.error("something went wrong")
@@ -37,11 +37,13 @@ const Product = ({ cart, setCart, wishlist, setWishlist, isAuthenticated, handle
             const isProductInCart = prevCart.some(cartItem => product.id === cartItem.id);
 
             if (isProductInCart) {
-                toast.error(product.title + "Product already in cart");
+                toast.error(product.title + " already in cart");
                 return prevCart;
             }
             else {
                 const updatedCart = [...prevCart, product];
+                localStorage.setItem("cartlength",cart.length + 1); 
+                toast.success(product.title + " added in cart!!")
                 return updatedCart;
             }
         });
@@ -57,8 +59,10 @@ const Product = ({ cart, setCart, wishlist, setWishlist, isAuthenticated, handle
         setWishlist(prevWishlist => {
             const isProductInWishlist = prevWishlist.some(wishlistItem => product.id === wishlistItem.id);
             if (isProductInWishlist) {
+                toast.error(product.title + " removed from wishlist")
                 return prevWishlist.filter(wishlistItem => wishlistItem.id !== product.id);
             } else {
+                toast.success(product.title + " wishlisted!!")
                 return [...prevWishlist, product];
             }
         });
@@ -80,6 +84,7 @@ const Product = ({ cart, setCart, wishlist, setWishlist, isAuthenticated, handle
                                             handleAddToCart={handleAddToCart} 
                                             handleAddToWishlist={handleAddToWishlist} 
                                             wishlist={wishlist} 
+                                            cart={cart}
                                         />
                                     )
                                 })

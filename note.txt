@@ -58,6 +58,17 @@ react-helmet => for seo
 npm install -D tailwindcss postcss autoprefixer
 
 
+!!localStorage.getItem('token'):
+
+The !! is a common JavaScript trick to convert a value to a boolean.
+If 'token' is present in localStorage, localStorage.getItem('token') will return the token as a string, and !! will convert it to true.
+If 'token' is not present, localStorage.getItem('token') will return null, and !! will convert it to false.
+
+
+useState(!!localStorage.getItem('token')):
+
+useState is a React hook that manages state in functional components.
+The initial value of isAuthenticated is set to true if there is a 'token' in localStorage, and false otherwise.
 
 
 
@@ -66,14 +77,39 @@ npm install -D tailwindcss postcss autoprefixer
 
 
 
+//Higher order component
+// const Wrapper = (Component) => (props) => {
+//     const data = "{}"
+//     return (
+//         <Component data={data}/>
+//     )
+// }
+
+// const Product1 = () => {
+
+// }
+
+// const Product2 = () => {
+
+// }
+
+// Wrapper(Product2)
 
 
 
 
 
 
+    // <CParent>
+    //     <Child></Child>
+    // </CParent>
+
+    // <Slider renderGallery={ <h1>Hello I am Gallery</h1> } />
+
+    // return (
 
 
+    // )
 
 
 
@@ -181,3 +217,71 @@ Explanation:
 Functional setState: By using the functional form setCart(prevCart => ...), you ensure that the latest state (prevCart) is used when updating the cart state. This avoids issues with stale state when you have multiple rapid state updates.
 
 Console Logging: The console.log(updatedCart) will now correctly log the cart's state after the product is added.
+
+
+
+/* import React from "react";
+import ProductList from "../components/ProductList.jsx";
+
+class ProductContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: [
+               
+            ],
+            cartCount:0,
+            cart : [],
+            productList : []
+        };
+
+    this.getProducts =  this.getProducts.bind(this);
+    this.handleAddToCart = this.handleAddToCart.bind(this);
+
+    }
+
+    componentDidMount(){
+        console.log("Mounted");
+        this.getProducts();
+    } 
+
+    componentDidUpdate(){
+        console.log("Updated")
+    }
+
+    
+    getProducts(){
+        fetch('https://fakestoreapi.com/products')
+            .then(res=>res.json())
+            .then(data => {
+                this.setState({products : data});
+            });
+    }
+
+    handleAddToCart(){
+        const { cartCount } = this.state;
+        this.setState({ cartCount : cartCount + 1})
+    }
+    
+
+
+    render() {
+        const { products,cartCount } = this.state;
+        
+        return (
+            <>
+                <div>
+                    <h1>Product <span>Cart count : {cartCount}</span></h1>
+
+                    <div>
+                        <ProductList products={products} handleAddToCart={this.handleAddToCart} />
+                        <Header products={products} handleAddToCart={this.handleAddToCart} />
+                    </div>
+                </div>
+            </>
+        );
+    }
+}
+
+
+export default ProductContainer;  */

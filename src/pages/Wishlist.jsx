@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../components/Layout/Layout'
-import ProductCard from '../components/ProductCard'
+import ProductCard from '../container/ProductCard'
 import Metapage from '../components/Layout/Metapage'
 
 const Wishlist = ({ wishlist }) => {

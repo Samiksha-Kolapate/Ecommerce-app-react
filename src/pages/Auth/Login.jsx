@@ -41,13 +41,9 @@ const Login = ({setIsAuthenticated}) => {
         }  catch (err) {
             const errorMessage = err.response?.data?.message || 'An error occurred';
             
-            if (errorMessage.toLowerCase().includes("user not found")) {
-                toast.error('User not registered. Redirecting to signup...');
-                setTimeout(() => {
-                    navigate('/signup'); // Redirect to signup page after showing the error message
-                }, 2000);
-            } else {
+            if (errorMessage.toLowerCase().includes("unauthorized")) {
                 toast.error('Invalid email or password. Please try again.');
+                navigate('/login');
             }
     
             setError(errorMessage);

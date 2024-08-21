@@ -4,7 +4,7 @@ import { useState, useEffect} from 'react';
 
 
 const ProductCard = (props) => {
-    const { product, index, handleAddToCart, handleAddToWishlist,wishlist } = props;
+    const { product, index, handleAddToCart, handleAddToWishlist,wishlist,cart } = props;
 
     const [isInWishlist, setIsInWishlist] = useState(false);
     
@@ -60,7 +60,8 @@ const ProductCard = (props) => {
                         </button>
                         <button
                             className="btn btn-dark ms-1"
-                            onClick={() => handleAddToCart(product)}
+                            onClick={() => {handleAddToCart(product);
+                            }}
                         >
                             Add to cart
                         </button>
