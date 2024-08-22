@@ -17,6 +17,7 @@ const ProductDetails = () => {
             toast.error("Failed to load product details")
         }
     };
+
     useEffect(() => {
         getSingleProduct();
     }, [productId]);
