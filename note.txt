@@ -218,6 +218,26 @@ Functional setState: By using the functional form setCart(prevCart => ...), you 
 
 Console Logging: The console.log(updatedCart) will now correctly log the cart's state after the product is added.
 
+React.lazy: This function allows you to dynamically import components, which means the components are only loaded when they are needed (i.e., when the user navigates to the corresponding route). This is helpful in reducing the initial load time of your application, especially when you have large components or many routes.
+
+Syntax: React.lazy(() => import('./Component')) returns a Promise that resolves to the module containing the component. This allows React to load the component asynchronously.
+
+
+
+Suspense: This component is used to show a fallback UI (like a loading spinner) while the lazy-loaded component is being fetched.
+
+fallback={<Loading />}: The fallback prop specifies what should be rendered while the lazy-loaded components are being loaded. In this case, it renders a Loading component.
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* import React from "react";

@@ -4,7 +4,6 @@ import Metapage from "../components/Layout/Metapage";
 import ProductCard from "../container/ProductCard";
 import axios from "axios";
 import toast from "react-hot-toast";
-// import { toast } from 'react-toastify';
 
 
 
@@ -62,6 +61,7 @@ const Product = ({ cart, setCart, wishlist, setWishlist, isAuthenticated, handle
                 toast.error(product.title + " removed from wishlist")
                 return prevWishlist.filter(wishlistItem => wishlistItem.id !== product.id);
             } else {
+                localStorage.setItem("wishlength",wishlist.length + 1); 
                 toast.success(product.title + " wishlisted!!")
                 return [...prevWishlist, product];
             }

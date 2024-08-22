@@ -36,9 +36,10 @@ const Signup = () => {
               name: formData.name,
               email: formData.email,
               password: formData.password,
-              avatar: 'https://api.lorem.space/image/face?w=150&h=150', // Placeholder avatar
-          });
-
+              avatar: 'https://api.lorem.space/image/face?w=150&h=150' // Placeholder avatar
+          }
+        );
+        toast.success("Account created successfully");
           // Navigate to login or another page after successful signup
           navigate('/login');
       } catch (err) {

@@ -1,16 +1,17 @@
 import React from 'react'
 import { FaHeart } from 'react-icons/fa';
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const ProductCard = (props) => {
-    const { product, index, handleAddToCart, handleAddToWishlist,wishlist,cart } = props;
+    const { product, index, handleAddToCart, handleAddToWishlist, wishlist, cart } = props;
 
     const [isInWishlist, setIsInWishlist] = useState(false);
-    
+
     useEffect(() => {
         let isProductInWishlist = false;
-        if(wishlist){
+        if (wishlist) {
             isProductInWishlist = wishlist.some(wishlistItem => product.id === wishlistItem.id);
         }
         setIsInWishlist(isProductInWishlist);
@@ -19,7 +20,7 @@ const ProductCard = (props) => {
     const handleWishlistClick = () => {
         handleAddToWishlist(product);
     };
-     
+
     return (
         <>
             <div className="card m-2 p-3 position-relative" >
@@ -32,10 +33,10 @@ const ProductCard = (props) => {
                 <div className="wishlist-icon position-absolute top-0 end-0 m-2 p-3">
                     <FaHeart
                         onClick={handleWishlistClick}
-                       style={{ color: isInWishlist ? 'red' : 'black', cursor: 'pointer' }}
+                        style={{ color: isInWishlist ? 'red' : 'black', cursor: 'pointer' }}
                     />
                 </div>
-                
+
                 <div className="card-body">
                     <div className="card-name-price">
                         <h5 className="card-title">{product.title}</h5>
@@ -53,14 +54,18 @@ const ProductCard = (props) => {
                     </div>
 
                     <div className="card-name-price">
-                        <button
-                            className="btn btn-info ms-1"
-                        >
-                            More Details
-                        </button>
+                        <Link to={`/product/${product.id}`} >
+                            <button
+                                className="btn btn-info ms-1"
+                            >
+                                More Details
+                            </button>
+                        </Link>
+
                         <button
                             className="btn btn-dark ms-1"
-                            onClick={() => {handleAddToCart(product);
+                            onClick={() => {
+                                handleAddToCart(product);
                             }}
                         >
                             Add to cart

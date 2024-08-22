@@ -22,11 +22,13 @@ const Header = (props) => {
 
     const handleLogout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('userEmail');
         setIsAuthenticated(false);
         // window.location.href = '/login';
         navigate('/login');
     };
 
+    const userEmail = localStorage.getItem("userEmail")
 
 
     return (
@@ -48,14 +50,14 @@ const Header = (props) => {
 
                             {isAuthenticated ? (
                                 <>
-
+                                   
                                     <li className="nav-item">
                                         <NavLink to="/wishlist" className="nav-link">
                                             < FaHeart style={{ fontSize: '24px' }} />
                                             <sup>
 
                                                 {wishlist.length > 0 && (
-                                                    <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info">{wishlist.length}</span>
+                                                    <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info">{localStorage.getItem("wishlength")}</span>
                                                 )}
                                             </sup>
                                         </NavLink>
@@ -75,6 +77,11 @@ const Header = (props) => {
 
                                     <li className="nav-item">
                                         <button className="nav-link btn" onClick={handleLogout}>Logout</button>
+                                    </li>
+
+                                    <li className="nav-item">
+                                        <h5>{userEmail} </h5>
+                                            
                                     </li>
                                 </>
                             ) : (

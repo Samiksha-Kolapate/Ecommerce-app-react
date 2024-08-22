@@ -121,3 +121,11 @@
   border-radius: 50%;
   padding: 5px;
 }
+
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+}

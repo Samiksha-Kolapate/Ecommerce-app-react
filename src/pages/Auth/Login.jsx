@@ -10,7 +10,7 @@ import Metapage from '../../components/Layout/Metapage';
 const Login = ({setIsAuthenticated}) => {
     const [formData, setFormData] = useState({
         email:'',
-        password:''
+        password:'',
     });
 
     const [error, setError] = useState(null); 
@@ -27,14 +27,13 @@ const Login = ({setIsAuthenticated}) => {
         e.preventDefault();             // by preventing default will not refresh and single page app will stay as it is
 
         try {
-            // Replace with your login API endpoint
             const response = await axios.post('https://api.escuelajs.co/api/v1/auth/login', {
                 email: formData.email,
                 password: formData.password,
             });
 
-            // Store the token or handle the response as needed
             localStorage.setItem('token', response.data.access_token);
+            localStorage.setItem('userEmail', formData.email);
             setIsAuthenticated(true);
             toast.success('Login successful');
             navigate('/');
