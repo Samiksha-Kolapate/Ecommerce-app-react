@@ -1,51 +1,92 @@
+.home-page h1 {
+  color: gray;
+  font-family: "Playfair Display", serif;
+}
 
-  .home-page h1 {
-    color: gray;
-    font-family: "Playfair Display", serif;
-  }
-  
-  .home-page {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .home-page .card {
-    background-color: rgba(128, 128, 128, 0.097);
-    width: 30%;
-    gap: 1rem;
+.home-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  /* Add spacing between cards */
+}
+
+.home-page .card {
+  background-color: rgba(128, 128, 128, 0.097);
+  width: 30%;
+  /* gap: 1rem;
     display: flex;
     justify-content: center;
-    
-  }
-  .home-page .card-name-price {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  .home-page .card-price {
-    color: green;
-    font-weight: bold;
-  }
-  .home-page button {
-    border-radius: 0;
-    width: 100%;
-    border-top-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  
-  .home-page .card-text {
-    color: rgb(90, 89, 89);
-  }
-  
-  .home-page .card img:hover {
-    /* transform: scale(0.9); */
-    
-  }
-  
-  .home-page .card-img-top {
-    height: 300px !important;
-  }
-  
-  
+     */
+  display: flex;
+  flex-direction: column;
+  /* Ensure content is stacked vertically */
+  justify-content: space-between;
+  /* Adjusts card content */
+  margin-bottom: 2rem;
+  /* Add spacing below each card */
+}
+
+.home-page .card-body {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  /* Stack title, price, description */
+  justify-content: space-between;
+  /* Space between elements */
+}
+
+ .card-name-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  /* Ensures title and price align properly */
+  /* margin-bottom: 0.5rem; */
+  /* Add space below title and price */
+  min-height: 70px;
+  /* Set a consistent height for title/price */
+}
+
+.home-page .card-price {
+  color: green;
+  font-weight: bold;
+}
+.card-name-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.home-page button {
+  border-radius: 0;
+  width: 100%;
+  /* Ensure buttons take half the available width */
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 4%;
+  /* Add space between buttons */
+}
+
+
+.home-page .card-text {
+  color: rgb(90, 89, 89);
+  margin-bottom: 1rem; 
+  min-height: 60px; 
+}
+
+.home-page .card img:hover {
+  /* transform: scale(0.9); */
+
+}
+
+.home-page .card-img-top {
+  height: 300px !important;
+}
+
+
+.wishlist-icon {
+  z-index: 1;
+}

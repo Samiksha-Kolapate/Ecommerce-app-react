@@ -4,21 +4,24 @@ import { NavLink, Link, useNavigate } from 'react-router-dom'
 import logo from '/images/logo.png'
 import { PiShoppingCartBold } from "react-icons/pi";
 import { FaHeart } from 'react-icons/fa';
+import SearchInput from '../SearchInput';
 // import { Badge } from "antd";
 
 
 const Header = (props) => {
 
-    const { cart, wishlist, isAuthenticated, setIsAuthenticated } = props;
+    const { cart, wishlist, isAuthenticated, setIsAuthenticated, onSearch } = props;
 
     // const [isAuthenticated, setIsAuthenticated] = useState(false);
     const navigate = useNavigate();
 
+    const [searchQuery, setSearchQuery] = useState('');
 
-  /*   useEffect(() => {
-        const token = localStorage.getItem('token');
-        setIsAuthenticated(!!token);
-    }, []); */
+
+    /*   useEffect(() => {
+          const token = localStorage.getItem('token');
+          setIsAuthenticated(!!token);
+      }, []); */
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -29,6 +32,14 @@ const Header = (props) => {
     };
 
     const userEmail = localStorage.getItem("userEmail")
+
+    const handleSearch = (event) => {
+        if (onSearch) {
+            onSearch(event.target.value);
+        } else {
+            console.warn("onSearch function is not defined.");
+        }
+    };
 
 
     return (
@@ -43,14 +54,30 @@ const Header = (props) => {
                             <img src={logo} style={{ width: '50px', height: '50px' }} />
                             e-Shopping
                         </Link>
+
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                            <li className="nav-item">
+                                <form className="d-flex" onSubmit={handleSearch}>
+                                    <input
+                                        className="form-control me-2"
+                                        type="search"
+                                        // placeholder="Search"
+                                        aria-label="Search"
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                    />
+                                    <button className="btn btn-outline-success" type="submit">Search</button>
+                                </form>
+                            </li>
+
                             <li className="nav-item">
                                 <NavLink to="/" className="nav-link">Home</NavLink>
                             </li>
 
                             {isAuthenticated ? (
                                 <>
-                                   
+
                                     <li className="nav-item">
                                         <NavLink to="/wishlist" className="nav-link">
                                             < FaHeart style={{ fontSize: '24px' }} />
@@ -67,7 +94,7 @@ const Header = (props) => {
                                         <NavLink to="/cart" className="nav-link">
                                             <PiShoppingCartBold style={{ fontSize: '24px' }} />
                                             <sup>
-                                                
+
                                                 {cart.length > 0 && (
                                                     <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info">{localStorage.getItem("cartlength")}</span>
                                                 )}
@@ -79,13 +106,13 @@ const Header = (props) => {
                                         <button className="nav-link btn" onClick={handleLogout}>Logout</button>
                                     </li>
 
-                                    <li className="nav-item">
+                                    {/* <li className="nav-item">
                                         <h5>{userEmail} </h5>
                                             
-                                    </li>
+                                    </li> */}
                                 </>
                             ) : (
-                                <>                                  
+                                <>
 
                                     <li className="nav-item">
                                         <NavLink to="/signup" className="nav-link">SignUp</NavLink>
@@ -97,10 +124,6 @@ const Header = (props) => {
 
                                 </>
                             )}
-
-
-
-
                         </ul>
 
                     </div>
