@@ -1,12 +1,12 @@
 import React from 'react'
 import { FaHeart } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import { addToCartSaga } from '../store/Cart/cart.action';
-import { addToWishlist, addToWishlistSaga } from '../store/Wishlist/wishlist.action';
+import { addToWishlistSaga, deleteToWishlistSaga } from '../store/Wishlist/wishlist.action';
 
 
 const ProductCard = (props) => {
@@ -43,11 +43,11 @@ const ProductCard = (props) => {
     //     else {
     //         addToCartAction(product); // Dispatch the saga action
     //     }
-        
+
     //             setCart(prevCart => {
-        
+
     //                 const isProductInCart = prevCart.some(cartItem => product.id === cartItem.id);
-        
+
     //                 if (isProductInCart) {
     //                     toast.error(product.title + " already in cart");
     //                     return prevCart;
@@ -64,15 +64,28 @@ const ProductCard = (props) => {
 
 
     const hadleCartProduct = () => {
-        let exitProduct = props.cart.some(value => value.id===product.id)
-        if(exitProduct){
-            return
-        }else{
-            props.addToCartAction(product)
+        let existProduct = props.cart.some(value => value.id === product.id)
+        if (existProduct) {
+            toast.error(product.title + " already in cart");
+            return;
+        } else {
+            props.addToCartAction(product);
+            toast.success(product.title + " added in cart!!")
         }
-
     }
 
+    const handleWishlistProduct = () => {
+        let existProduct = props.wishlist.some(value => value.id === product.id)
+        if (existProduct) {
+            props.deleteToWishAction(product);
+            toast.error(product.title + " removed from wishlist");
+            return;
+        }
+        else {
+            props.addToWishlistAction(product);
+            toast.success(product.title + " wishlisted!!")
+        }
+    }
 
     // const handleAddToWishlist = (product) => {
     //     if (!isAuthenticated) {
@@ -83,17 +96,17 @@ const ProductCard = (props) => {
     //         addToWishlistAction(product);
     //     }
 
-        //  setWishlist(prevWishlist => {
-        //      const isProductInWishlist = prevWishlist.some(wishlistItem => product.id === wishlistItem.id);
-        //      if (isProductInWishlist) {
-        //          toast.error(product.title + " removed from wishlist")
-        //          return prevWishlist.filter(wishlistItem => wishlistItem.id !== product.id);
-        //      } else {
-        //          localStorage.setItem("wishlength",wishlist.length + 1); 
-        //          toast.success(product.title + " wishlisted!!")
-        //          return [...prevWishlist, product];
-        //      }
-        //  });
+    //  setWishlist(prevWishlist => {
+    //      const isProductInWishlist = prevWishlist.some(wishlistItem => product.id === wishlistItem.id);
+    //      if (isProductInWishlist) {
+    //          toast.error(product.title + " removed from wishlist")
+    //          return prevWishlist.filter(wishlistItem => wishlistItem.id !== product.id);
+    //      } else {
+    //          localStorage.setItem("wishlength",wishlist.length + 1); 
+    //          toast.success(product.title + " wishlisted!!")
+    //          return [...prevWishlist, product];
+    //      }
+    //  });
     // };
 
 
@@ -108,8 +121,9 @@ const ProductCard = (props) => {
 
                 <div className="wishlist-icon position-absolute top-0 end-0 m-2 p-3">
                     <FaHeart
-                        onClick={()=>{addToWishlistAction(product)}}
-                        // style={{ color: isInWishlist ? 'red' : 'black', cursor: 'pointer' }}
+                        onClick={handleWishlistProduct}
+                    // onClick={() => { addToWishlistAction(product) }}
+                    // style={{ color: isInWishlist ? 'red' : 'black', cursor: 'pointer' }}
                     />
                 </div>
 
@@ -124,9 +138,9 @@ const ProductCard = (props) => {
                         </h5>
                     </div>
                     {/* <div> */}
-                        <p className="card-text mb-2">
-                            {product.description.substring(0, 100)}
-                        </p>
+                    <p className="card-text mb-2">
+                        {product.description.substring(0, 100)}
+                    </p>
                     {/* </div> */}
 
                     <div className="card-name-buttons">
@@ -170,7 +184,8 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(
         {
             addToCartAction: addToCartSaga,
-            addToWishlistAction: addToWishlistSaga
+            addToWishlistAction: addToWishlistSaga,
+            deleteToWishAction : deleteToWishlistSaga
         },
         dispatch
     );

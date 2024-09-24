@@ -19,12 +19,14 @@ const deleteToCart = (product) => {
     }
 }
 
-const deletToCartSaga = (product) => {
+const deleteToCartSaga = (product) => {
     return {
         type: "DELETE_TO_CART_SAGA",
         payload: product
     }
 }
+
+
 
 const incrementQuantity = (product) => {
     return {
@@ -58,7 +60,7 @@ export {
     addToCart,
     addToCartSaga,
     deleteToCart,
-    deletToCartSaga,
+    deleteToCartSaga,
     incrementQuantity,
     incrementQuantitySaga,
     decrementQuantity,

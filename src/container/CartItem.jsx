@@ -1,6 +1,6 @@
 import React from "react";
 import { connect, useDispatch } from "react-redux";
-import { decrementQuantity, deletToCartSaga, incrementQuantity } from "../store/Cart/cart.action";
+import { decrementQuantity, deleteToCartSaga, incrementQuantity } from "../store/Cart/cart.action";
 
 function CartItem(props) {
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ function CartItem(props) {
                       </button>
                       <button
                         type="button"
-                        onClick={() => dispatch(deletToCartSaga(product.id))}
+                        onClick={() => dispatch(deleteToCartSaga(product.id))}
                         className="btn btn-outline-danger btn-sm ms-3"
                       >
                         <i className="bi bi-trash"></i> Remove

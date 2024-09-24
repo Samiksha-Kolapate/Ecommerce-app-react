@@ -12,9 +12,25 @@ const addToWishlistSaga = (product) => {
     }
 }
 
+const deleteToWishlist = (product) => {
+    return {
+        type: "DELETE_TO_WISHLIST",
+        payload: product
+    }
+}
+
+const deleteToWishlistSaga = (product) => {
+    return {
+        type: "DELETE_TO_WISHLIST_SAGA",
+        payload: product
+    }
+}
+
 export {
     addToWishlist,
-    addToWishlistSaga
+    addToWishlistSaga,
+    deleteToWishlist,
+    deleteToWishlistSaga
 }
 
 

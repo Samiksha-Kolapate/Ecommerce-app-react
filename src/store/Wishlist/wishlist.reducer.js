@@ -1,17 +1,21 @@
 const initialState = {
-    wishlist : [],
+    wishlist: [],
 }
 
-const wishlistReducer = (state = initialState,action) => {
-    // console.log(state.wishlist);
+const wishlistReducer = (state = initialState, action) => {
 
-    switch(action.type){
-        case "ADD_TO_WISHLIST" : 
+    switch (action.type) {
+        case "ADD_TO_WISHLIST":
             return {
                 ...state,
-                wishlist : [...state.wishlist, action.payload]
+                wishlist: [...state.wishlist, action.payload]
             }
-        default :
+        case "DELETE_TO_WISHLIST":
+            return {
+                ...state,
+                wishlist: state.wishlist.filter(item => item.id !== action.payload)
+            }
+        default:
             return state;
     }
 }

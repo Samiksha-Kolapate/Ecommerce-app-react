@@ -1,17 +1,18 @@
 import { all } from "redux-saga/effects";
 
-import { cartSagas, decrementQuantitySagas, deleteItemSaga, incrementQuantitySagas } from "./Cart/cart.saga";
-import { wishlistSagas } from "./Wishlist/wishlist.saga";
+import { cartSagas, decrementQuantitySagas, deleteCartItemSaga, incrementQuantitySagas } from "./Cart/cart.saga";
+import { deleteWishlistItemSaga, wishlistSagas } from "./Wishlist/wishlist.saga";
 import { sagaProductList } from "./Products/product.saga"
 
 
 function* rootSaga() {
     yield all([
         cartSagas(),
-        deleteItemSaga(),
+        deleteCartItemSaga(),
         incrementQuantitySagas(),
         decrementQuantitySagas(),
         wishlistSagas(),
+        deleteWishlistItemSaga(),
         sagaProductList(),
     ]);
 }

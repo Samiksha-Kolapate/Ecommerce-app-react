@@ -18,7 +18,7 @@ function* deleteToCartSaga(payload){
 }
 
 
-export function* deleteItemSaga(){
+export function* deleteCartItemSaga(){
   yield takeLatest("DELETE_TO_CART_SAGA", deleteToCartSaga)
 }
 
