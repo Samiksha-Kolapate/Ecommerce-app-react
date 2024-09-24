@@ -8,14 +8,14 @@ import { FaHeart } from 'react-icons/fa';
 
 
 
-const ProductDetail = () => {
+const ProductDetails = () => {
 
     const { productId } = useParams();
-    const [product, setProduct] = useState(null);
+    const [product, setProduct] = useState({});
 
     const getSingleProduct = async () => {
         try {
-            const { data } = await axios.get(`https://fakestoreapi.com/products/${productId}`);
+            const data  = await axios.get(`https://fakestoreapi.com/products/${productId}`);
             // const { data } = await axios.get(`https://api.escuelajs.co/api/v1/products/${productId}`);
             setProduct(data);
         }
@@ -52,9 +52,9 @@ const ProductDetail = () => {
                 <div className="container mt-4 position-relative">
                     <div className="d-flex flex-wrap">
                         <img
-                            src={product.image}
+                            src={product?.image}
                             className="card-img-top"
-                            alt={product.title}
+                            alt={product?.title}
                         />
 
                         <div className="wishlist-icon position-absolute top-0 end-0 m-2 p-3">
@@ -65,7 +65,7 @@ const ProductDetail = () => {
                         </div>
 
                         <div className="card-name-price">
-                            <h5 className="card-title">{product.title}</h5>
+                            <h5 className="card-title">{product?.title}</h5>
                             <h5 className="card-title card-price">
                                 {product.price.toLocaleString("en-IN", {
                                     style: "currency",
@@ -76,7 +76,7 @@ const ProductDetail = () => {
 
                         <div>
                             <p className="card-text mb-2">
-                                {product.description}
+                                {product?.description}
                             </p>
                         </div>
 
@@ -105,4 +105,4 @@ const ProductDetail = () => {
     );
 };
 
-export default ProductDetail;
+export default ProductDetails;

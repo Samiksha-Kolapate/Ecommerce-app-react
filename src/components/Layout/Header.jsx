@@ -4,6 +4,7 @@ import { NavLink, Link, useNavigate } from 'react-router-dom'
 import logo from '/images/logo.png'
 import { PiShoppingCartBold } from "react-icons/pi";
 import { FaHeart } from 'react-icons/fa';
+import { connect } from "react-redux";
 import SearchInput from '../SearchInput';
 // import { Badge } from "antd";
 
@@ -18,12 +19,13 @@ const Header = (props) => {
     const [searchQuery, setSearchQuery] = useState('');
 
 
-    /*   useEffect(() => {
+      useEffect(() => {
           const token = localStorage.getItem('token');
           setIsAuthenticated(!!token);
-      }, []); */
+      }, []);
 
     const handleLogout = () => {
+        console.log(22222);
         localStorage.removeItem('token');
         localStorage.removeItem('userEmail');
         setIsAuthenticated(false);
@@ -31,7 +33,7 @@ const Header = (props) => {
         navigate('/login');
     };
 
-    const userEmail = localStorage.getItem("userEmail")
+    // const userEmail = localStorage.getItem("userEmail")
 
     const handleSearch = (event) => {
         if (onSearch) {
@@ -44,7 +46,7 @@ const Header = (props) => {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
                 <div className="container-fluid">
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon" />
@@ -71,10 +73,6 @@ const Header = (props) => {
                                 </form>
                             </li>
 
-                            <li className="nav-item">
-                                <NavLink to="/" className="nav-link">Home</NavLink>
-                            </li>
-
                             {isAuthenticated ? (
                                 <>
 
@@ -82,10 +80,8 @@ const Header = (props) => {
                                         <NavLink to="/wishlist" className="nav-link">
                                             < FaHeart style={{ fontSize: '24px' }} />
                                             <sup>
-
-                                                {wishlist.length > 0 && (
-                                                    <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info">{localStorage.getItem("wishlength")}</span>
-                                                )}
+                                            <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info"> {props.wishlist.length}</span>
+                                               
                                             </sup>
                                         </NavLink>
                                     </li>
@@ -94,10 +90,8 @@ const Header = (props) => {
                                         <NavLink to="/cart" className="nav-link">
                                             <PiShoppingCartBold style={{ fontSize: '24px' }} />
                                             <sup>
-
-                                                {cart.length > 0 && (
-                                                    <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info">{localStorage.getItem("cartlength")}</span>
-                                                )}
+                                            <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info"> {props.cart.length}</span>
+                                               
                                             </sup>
                                         </NavLink>
                                     </li>
@@ -134,4 +128,12 @@ const Header = (props) => {
     )
 }
 
-export default Header
+const mapStateToProps = (state) => {
+    
+    return {
+       cart : state.cartProduct.cart,
+       wishlist : state.wishlistProduct.wishlist
+    };
+  };
+  
+  export default connect(mapStateToProps)(Header);

@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import Spinner from "./components/Spinner";
 import PrivateRoute from "./routes/PrivateRoute";
-import Counter from "./components/Counter";
 const Productlist = React.lazy(() => import("./pages/Productlist"));
 const ProductDetails = React.lazy(() => import("./container/ProductDetails"));
 const Cart = React.lazy(() => import("./pages/Cart"));
@@ -19,12 +18,10 @@ const Layout = React.lazy(() => import("./components/Layout/Layout"));
 
 function App() {
 
-    const [cart, setCart] = useState([]);
-    const [wishlist, setWishlist] = useState([]);
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
     // console.log(isAuthenticated);
     const navigate = useNavigate();
-
+   
     const handleLoginRedirect = () => {
         // toast.error("You must be logged in to perform this action");
         navigate('/login');
@@ -37,18 +34,12 @@ function App() {
                 <Toast />
 
                 <Routes>
-                    <Route path="/" element={<Layout cart={cart}
-                        wishlist={wishlist}
-                        setWishlist={setWishlist}
+                    <Route path="/" element={<Layout 
                         isAuthenticated={isAuthenticated}
-                        setIsAuthenticated={setIsAuthenticated}
+                        setIsAuthenticated = {setIsAuthenticated}
                     />}>
                         <Route index element={
                             <Productlist
-                                cart={cart}
-                                setCart={setCart}
-                                wishlist={wishlist}
-                                setWishlist={setWishlist}
                                 isAuthenticated={isAuthenticated}
                                 handleLoginRedirect={handleLoginRedirect}
                             />
@@ -64,12 +55,9 @@ function App() {
                             </PrivateRoute>
                         } />
                         <Route path="product/:productId" element={<ProductDetails />} />
-                        <Route path="/cart" element={<Cart cart={cart} />} />
-                        <Route path="/wishlist" element={<Wishlist wishlist={wishlist} />} />
-                        {/* <Route path="/counter" element={<Counter />} /> */}
-
+                        <Route path="/cart" element={<Cart />} />
+                        <Route path="/wishlist" element={<Wishlist />} />
                     </Route>
-                    {/* <Route path="*" element={<Login />} /> */}
                 </Routes>
             </Suspense>
         </>

@@ -305,3 +305,37 @@ class ProductContainer extends React.Component {
 
 
 export default ProductContainer;  */
+
+
+// Auth
+// Product list
+// Filter category,,,,
+// Search
+// Add to cart
+// Add to wishlist
+// Cart remove
+// wishlist
+// product details
+// proceed to buy
+
+// UI 
+
+
+// category                         2 -> Friday
+   1. api calling
+   2. redux 
+   3. UI
+   4.
+
+// Cart remove                       1 day -> Tuesday
+    1. cart Item Separation
+    2. ui
+    3. remove logic
+
+// Search                           1 Day ->  Wednesday
+    1. debouncing
+    2. api calling
+    3. redux maintain
+
+// proceed to buy  
+    1. add page

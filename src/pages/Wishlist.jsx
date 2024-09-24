@@ -2,8 +2,10 @@ import React from 'react'
 import Layout from '../components/Layout/Layout'
 import ProductCard from '../container/ProductCard'
 import Metapage from '../components/Layout/Metapage'
+import { connect } from "react-redux";
 
-const Wishlist = ({ wishlist }) => {
+
+const Wishlist = ({ props }) => {
     return (
         <>
             <Metapage title={"My Wishlist"}>
@@ -11,8 +13,8 @@ const Wishlist = ({ wishlist }) => {
                 <div className="container mt-4">
                     <h2>Your Wishlist</h2>
                     <div className="d-flex flex-wrap">
-                        {wishlist.length > 0 ? (
-                            wishlist.map((product, index) => (
+                        {props.wishlist.length > 0 ? (
+                           props. wishlist.map((product, index) => (
                                 <ProductCard key={index} product={product} />
                             ))
                         ) : (
@@ -25,4 +27,11 @@ const Wishlist = ({ wishlist }) => {
     )
 }
 
-export default Wishlist;
+const mapStateToProps = (state) => {
+    return {
+       wishlist: state.wishlistProduct.wishlist
+    };
+  };
+  
+
+  export default connect(mapStateToProps)(Wishlist);

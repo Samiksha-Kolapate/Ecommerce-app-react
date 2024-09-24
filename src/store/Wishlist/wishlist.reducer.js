@@ -3,7 +3,7 @@ const initialState = {
 }
 
 const wishlistReducer = (state = initialState,action) => {
-    console.log(state.wishlist);
+    // console.log(state.wishlist);
 
     switch(action.type){
         case "ADD_TO_WISHLIST" : 

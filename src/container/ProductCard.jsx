@@ -14,86 +14,102 @@ const ProductCard = (props) => {
 
     const [isInWishlist, setIsInWishlist] = useState(false);
     const navigate = useNavigate();
+    // navigate("")
 
+    // useEffect(() => {
+    //     let isProductInWishlist = false;
+    //     if (wishlist) {
+    //         isProductInWishlist = wishlist.some(wishlistItem => product.id === wishlistItem.id);
+    //     }
+    //     setIsInWishlist(isProductInWishlist);
+    // }, [wishlist]);   // on updation it should go in wishlist;;; color changes gray to red ;; red to gray compoment did update
 
-    useEffect(() => {
-        let isProductInWishlist = false;
-        if (wishlist) {
-            isProductInWishlist = wishlist.some(wishlistItem => product.id === wishlistItem.id);
-        }
-        setIsInWishlist(isProductInWishlist);
-    }, [wishlist]);   // on updation it should go in wishlist;;; color changes gray to red ;; red to gray compoment did update
+    // const handleWishlistClick = () => {
+    //     handleAddToWishlist(product);
+    //     isProductInWishlist = wishlist.some(wishlistItem => product.id === wishlistItem.id);
+    //     if(isProductInWishlist){
+    //         return props.wishlist;
+    //     }
+    //     else{
+    //         addToWishlistAction(product);
+    //     }
+    // };
 
-    const handleWishlistClick = () => {
-        handleAddToWishlist(product);
-    };
-
-    const handleAddToCart = (product) => {
-        if (!isAuthenticated) {
-            handleLoginRedirect();
-            return;
-        }
-        else {
-            addToCartAction(product); // Dispatch the saga action
-        }
-        /* 
-                setCart(prevCart => {
+    // const handleAddToCart = (product) => {
+    //     if (!isAuthenticated) {
+    //         handleLoginRedirect();
+    //         return;
+    //     }
+    //     else {
+    //         addToCartAction(product); // Dispatch the saga action
+    //     }
         
-                    const isProductInCart = prevCart.some(cartItem => product.id === cartItem.id);
+    //             setCart(prevCart => {
         
-                    if (isProductInCart) {
-                        toast.error(product.title + " already in cart");
-                        return prevCart;
-                    }
-                    else {
-                        const updatedCart = [...prevCart, product];
-                        localStorage.setItem("cartlength",cart.length + 1); 
-                        toast.success(product.title + " added in cart!!")
-                        return updatedCart;
-                    }
-                }); */
-        // setCart([...cart,product]);    // was not updating cart as per present click ;;; giving output one step back
+    //                 const isProductInCart = prevCart.some(cartItem => product.id === cartItem.id);
+        
+    //                 if (isProductInCart) {
+    //                     toast.error(product.title + " already in cart");
+    //                     return prevCart;
+    //                 }
+    //                 else {
+    //                     const updatedCart = [...prevCart, product];
+    //                     localStorage.setItem("cartlength",cart.length + 1); 
+    //                     toast.success(product.title + " added in cart!!")
+    //                     return updatedCart;
+    //                 }
+    //             });
+    //     // setCart([...cart,product]);    // was not updating cart as per present click ;;; giving output one step back
+    // }
+
+
+    const hadleCartProduct = () => {
+        let exitProduct = props.cart.some(value => value.id===product.id)
+        if(exitProduct){
+            return
+        }else{
+            props.addToCartAction(product)
+        }
+
     }
 
 
+    // const handleAddToWishlist = (product) => {
+    //     if (!isAuthenticated) {
+    //         handleLoginRedirect();
+    //         return;
+    //     }
+    //     else {
+    //         addToWishlistAction(product);
+    //     }
 
-    const handleAddToWishlist = (product) => {
-        if (!isAuthenticated) {
-            handleLoginRedirect();
-            return;
-        }
-        else {
-            addToWishlistAction(product);
-        }
-
-        /*  setWishlist(prevWishlist => {
-             const isProductInWishlist = prevWishlist.some(wishlistItem => product.id === wishlistItem.id);
-             if (isProductInWishlist) {
-                 toast.error(product.title + " removed from wishlist")
-                 return prevWishlist.filter(wishlistItem => wishlistItem.id !== product.id);
-             } else {
-                 localStorage.setItem("wishlength",wishlist.length + 1); 
-                 toast.success(product.title + " wishlisted!!")
-                 return [...prevWishlist, product];
-             }
-         }); */
-    };
-
+        //  setWishlist(prevWishlist => {
+        //      const isProductInWishlist = prevWishlist.some(wishlistItem => product.id === wishlistItem.id);
+        //      if (isProductInWishlist) {
+        //          toast.error(product.title + " removed from wishlist")
+        //          return prevWishlist.filter(wishlistItem => wishlistItem.id !== product.id);
+        //      } else {
+        //          localStorage.setItem("wishlength",wishlist.length + 1); 
+        //          toast.success(product.title + " wishlisted!!")
+        //          return [...prevWishlist, product];
+        //      }
+        //  });
+    // };
 
 
     return (
         <>
-            <div className="card m-2 p-3 position-relative" >
+            <div className="card mx-3 my-4 p-3 position-relative" >
                 <img
-                    src={product.image}
+                    src={product.images}
                     className="card-img-top"
                     alt={product.title}
                 />
 
                 <div className="wishlist-icon position-absolute top-0 end-0 m-2 p-3">
                     <FaHeart
-                        onClick={handleWishlistClick}
-                        style={{ color: isInWishlist ? 'red' : 'black', cursor: 'pointer' }}
+                        onClick={()=>{addToWishlistAction(product)}}
+                        // style={{ color: isInWishlist ? 'red' : 'black', cursor: 'pointer' }}
                     />
                 </div>
 
@@ -131,9 +147,7 @@ const ProductCard = (props) => {
 
                         <button
                             className="btn btn-dark ms-1"
-                            onClick={() => {
-                                handleAddToCart(product);
-                            }}
+                            onClick={hadleCartProduct}
                         >
                             Add to cart
                         </button>

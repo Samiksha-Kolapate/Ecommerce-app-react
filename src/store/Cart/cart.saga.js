@@ -1,14 +1,51 @@
 import { put, takeLatest } from "redux-saga/effects";
 
-function* cartSaga(payload) {
-  yield put({ type: "ADD_TO_CART", payload: payload });
+function* addToCartSaga(payload) {
+  yield put({ 
+    type: "ADD_TO_CART", 
+    payload: payload.payload });
 }
 
 export function* cartSagas() {
-    yield takeLatest("ADD_TO_CART_SAGA", cartSaga);
+    yield takeLatest("ADD_TO_CART_SAGA", addToCartSaga);
+}
+
+function* deleteToCartSaga(payload){
+  yield put({
+    type: "DELETE_TO_CART",
+    payload: payload.payload
+  });
 }
 
 
+export function* deleteItemSaga(){
+  yield takeLatest("DELETE_TO_CART_SAGA", deleteToCartSaga)
+}
+
+function* incrementQuantitySaga(payload){
+  yield put({
+    type: "INCREMENT_QUANTITY",
+    payload: payload.payload
+  });
+}
+
+
+export function* incrementQuantitySagas(){
+  yield takeLatest("INCREMENT_QUANTITY_SAGA", incrementQuantitySaga)
+}
+
+
+function* decrementQuantitySaga(payload){
+  yield put({
+    type: "DECREMENT_QUANTITY",
+    payload: payload.payload
+  });
+}
+
+
+export function* decrementQuantitySagas(){
+  yield takeLatest("DECREMENT_QUANTITY_SAGA", decrementQuantitySaga)
+}
 
 
 
