@@ -24,20 +24,20 @@ function CartItem(props) {
                   <img
                     src={product.image}
                     alt={product.title}
-                    className="img-fluid rounded-start"
+                    className="img-fluid rounded-start m-3"
                   />
                 </div>
                 <div className="col-md-8">
-                  <div className="card-body">
-                    <h5 className="card-title">{product.title}</h5>
-                    <p className="card-text">
+                  <div className="card-body m-4">
+                    <h5 className="card-title text-bold mb-3 fs-3">{product.title}</h5>
+                    <p className="card-text mb-2 fs-5">
                       <small className="text-muted">
-                        <del>₹ {product.originalPrice}</del>
+                        {/* <del>₹ {product.originalPrice}</del> */}
                       </small>
                       &nbsp;&nbsp;
-                      <span className="text-success">₹ {product.price}</span>
+                      <span className="text-success">₹{product.price}</span>
                       &nbsp;&nbsp;
-                      <span className="badge bg-success">{product.discount}</span>
+                      {/* <span className="badge bg-success ">{product.discount}</span> */}
                     </p>
                     <div className="d-flex align-items-center mt-3">
                       <button
@@ -67,7 +67,7 @@ function CartItem(props) {
                         onClick={() => dispatch(deleteToCartSaga(product.id))}
                         className="btn btn-outline-danger btn-sm ms-3"
                       >
-                        <i className="bi bi-trash"></i> Remove
+                        <i className="bi bi-trash-fill"></i> Remove
                       </button>
                     </div>
                   </div>

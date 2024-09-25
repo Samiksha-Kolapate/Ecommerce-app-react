@@ -36,7 +36,7 @@ function Cart(props) {
             <div className="col-lg-4">
               <div className="card m-4">
                 <div className="card-header">
-                  <h5 className="card-title">Price Details</h5>
+                  <h5 className="card-title">Cart Summary</h5>
                 </div>
                 <div className="card-body">
                   <ul className="list-unstyled">
