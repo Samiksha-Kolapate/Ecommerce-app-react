@@ -50,7 +50,6 @@ const ProductCard = (props) => {
             toast.error("You have to login first")
             navigate('/login'); 
         }
-
     }
 
 
@@ -59,7 +58,7 @@ const ProductCard = (props) => {
         <>
             <div className="card mx-3 my-4 p-3 position-relative" >
                 <img
-                    src={product.images}
+                    src={product.image}
                     className="card-img-top"
                     alt={product.title}
                 />
