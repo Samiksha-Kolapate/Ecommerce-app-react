@@ -16,6 +16,7 @@ function WishlistItem(props) {
             return;
         } else {
             props.addToCartAction(product);
+            props.deleteToWishAction(product.id);
             toast.success(product.title + " added in cart!!")
         }
     }
@@ -38,9 +39,7 @@ function WishlistItem(props) {
                                     <div className="card-body">
                                         <h5 className="card-title">{product.title}</h5>
                                         <p className="card-text">
-                                            <small className="text-muted">
-                                                <del>₹ {product.originalPrice}</del>
-                                            </small>
+                                           
                                             &nbsp;&nbsp;
                                             <span className="text-success">₹ {product.price}</span>
                                             &nbsp;&nbsp;
@@ -50,7 +49,7 @@ function WishlistItem(props) {
                                         <button
                                                 type="button"
                                                 onClick={() => handleWishlistProduct(product) }
-                                                className="btn btn-outline-danger btn-sm ms-3"
+                                                className="btn btn-primary btn-sm ms-3"
                                             >
                                                 <i className="bi bi-trash"></i> Move to Cart
                                             </button>
@@ -58,7 +57,7 @@ function WishlistItem(props) {
                                             <button
                                                 type="button"
                                                 onClick={() => props.deleteToWishAction(product.id)}
-                                                className="btn btn-outline-danger btn-sm ms-3"
+                                                className="btn btn-danger btn-sm ms-3"
                                             >
                                                 <i className="bi bi-trash"></i> Remove
                                             </button>

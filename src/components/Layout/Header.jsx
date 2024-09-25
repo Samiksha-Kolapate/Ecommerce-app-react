@@ -6,14 +6,13 @@ import { PiShoppingCartBold } from "react-icons/pi";
 import { FaHeart } from 'react-icons/fa';
 import { connect } from "react-redux";
 import SearchInput from '../SearchInput';
-// import { Badge } from "antd";
+import Profile from '../../pages/User/Profile';
 
 
 const Header = (props) => {
 
-    const { cart, wishlist, isAuthenticated, setIsAuthenticated, onSearch } = props;
+    const { isAuthenticated, setIsAuthenticated, onSearch } = props;
 
-    // const [isAuthenticated, setIsAuthenticated] = useState(false);
     const navigate = useNavigate();
 
     const [searchQuery, setSearchQuery] = useState('');
@@ -29,11 +28,8 @@ const Header = (props) => {
         localStorage.removeItem('token');
         localStorage.removeItem('userEmail');
         setIsAuthenticated(false);
-        // window.location.href = '/login';
         navigate('/login');
     };
-
-    // const userEmail = localStorage.getItem("userEmail")
 
     const handleSearch = (event) => {
         if (onSearch) {
@@ -80,8 +76,9 @@ const Header = (props) => {
                                         <NavLink to="/wishlist" className="nav-link">
                                             < FaHeart style={{ fontSize: '24px' }} />
                                             <sup>
-                                            <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info"> {props.wishlist.length}</span>
-                                               
+                                                {props.wishlist.length>0 && (
+                                                <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info"> {props.wishlist.length}</span>
+                                                )}
                                             </sup>
                                         </NavLink>
                                     </li>
@@ -90,20 +87,24 @@ const Header = (props) => {
                                         <NavLink to="/cart" className="nav-link">
                                             <PiShoppingCartBold style={{ fontSize: '24px' }} />
                                             <sup>
+                                                {props.cart.length>0 && (
                                             <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info"> {props.cart.length}</span>
-                                               
+                                                )}
                                             </sup>
                                         </NavLink>
                                     </li>
+                                   {/*  <li className='nav-item'>
+                                                <Profile 
+                                                isAuthenticated = {props.isAuthenticated}
+                                                setIsAuthenticated = {props.setIsAuthenticated}
+                                                />
+                                    </li> */}
 
                                     <li className="nav-item">
                                         <button className="nav-link btn" onClick={handleLogout}>Logout</button>
                                     </li>
 
-                                    {/* <li className="nav-item">
-                                        <h5>{userEmail} </h5>
-                                            
-                                    </li> */}
+                                   
                                 </>
                             ) : (
                                 <>

@@ -10,25 +10,7 @@ import { sagaProductList } from "../store/Products/product.action.js"
 
 
 
-// const Productlist = ({ cart, setCart, wishlist, setWishlist, isAuthenticated, handleLoginRedirect }) => {
 const Productlist = (props) => {
-/* const [products, setProducts] = useState([]);
-
-const getAllProducts = async () =>{
-    try{
-        // const {data} = await axios.get('https://api.escuelajs.co/api/v1/products');
-        const {data} = await axios.get('https://fakestoreapi.com/products');
-        setProducts(data);  // not getting image  sliced first elt
-    }
-    catch(error){
-        toast.error("something went wrong")
-    }
-};
-
-// get category as well at a time 
-useEffect(() => {
-    getAllProducts();
- }, []); */
 
 useEffect(() => {
     props.productApiAction();
@@ -48,13 +30,7 @@ return (
                                     <ProductCard
                                           key={`${product.id}-${index}`}
                                          product={product} 
-                                        /* setCart = {setCart}
-                                         setWishlist= {setWishlist} */
                                         isAuthenticated={props.isAuthenticated}
-                                        // data={post}
-                                        handleLoginRedirect={props.handleLoginRedirect}
-                                        // wishlist={wishlist}
-                                        // cart={cart}
                                     />
                                 )
                             })
@@ -73,7 +49,6 @@ return (
 
 
 const mapStateToProps = (state) => {
-    // console.log(state.products.ListOfItems);
     return {
         productListData: state.products.ListOfItems,
     };

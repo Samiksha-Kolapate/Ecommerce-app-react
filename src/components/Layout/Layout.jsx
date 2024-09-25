@@ -5,19 +5,18 @@ import Header from './Header';
 import Footer from './Footer';
 
 
-const Layout = ({ cart,wishlist,isAuthenticated,setIsAuthenticated}) => {
-  
+const Layout = (props) => {
+
   return (
     <div>
-      <Header cart={cart} 
-              wishlist={wishlist} 
-              isAuthenticated={isAuthenticated} 
-              setIsAuthenticated= {setIsAuthenticated}
-              />
-      <main style={{ minHeight:'70vh '}}>
+      <Header
+        isAuthenticated={props.isAuthenticated}
+        setIsAuthenticated={props.setIsAuthenticated}
+      />
+      <main style={{ minHeight: '70vh ', margin: '8rem 0' }}>
         <Outlet />
       </main>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

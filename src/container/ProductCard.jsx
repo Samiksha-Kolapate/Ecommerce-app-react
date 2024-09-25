@@ -10,104 +10,49 @@ import { addToWishlistSaga, deleteToWishlistSaga } from '../store/Wishlist/wishl
 
 
 const ProductCard = (props) => {
-    const { product, index, wishlist, cart, setCart, setWishlist, isAuthenticated, handleLoginRedirect, addToCartAction, addToWishlistAction } = props;
-
-    const [isInWishlist, setIsInWishlist] = useState(false);
+    // const { product, index, wishlist, cart, setCart, setWishlist, isAuthenticated, handleLoginRedirect, addToCartAction, addToWishlistAction } = props;
+    // const [isInWishlist, setIsInWishlist] = useState(false);
+    const { product } = props;
     const navigate = useNavigate();
-    // navigate("")
-
-    // useEffect(() => {
-    //     let isProductInWishlist = false;
-    //     if (wishlist) {
-    //         isProductInWishlist = wishlist.some(wishlistItem => product.id === wishlistItem.id);
-    //     }
-    //     setIsInWishlist(isProductInWishlist);
-    // }, [wishlist]);   // on updation it should go in wishlist;;; color changes gray to red ;; red to gray compoment did update
-
-    // const handleWishlistClick = () => {
-    //     handleAddToWishlist(product);
-    //     isProductInWishlist = wishlist.some(wishlistItem => product.id === wishlistItem.id);
-    //     if(isProductInWishlist){
-    //         return props.wishlist;
-    //     }
-    //     else{
-    //         addToWishlistAction(product);
-    //     }
-    // };
-
-    // const handleAddToCart = (product) => {
-    //     if (!isAuthenticated) {
-    //         handleLoginRedirect();
-    //         return;
-    //     }
-    //     else {
-    //         addToCartAction(product); // Dispatch the saga action
-    //     }
-
-    //             setCart(prevCart => {
-
-    //                 const isProductInCart = prevCart.some(cartItem => product.id === cartItem.id);
-
-    //                 if (isProductInCart) {
-    //                     toast.error(product.title + " already in cart");
-    //                     return prevCart;
-    //                 }
-    //                 else {
-    //                     const updatedCart = [...prevCart, product];
-    //                     localStorage.setItem("cartlength",cart.length + 1); 
-    //                     toast.success(product.title + " added in cart!!")
-    //                     return updatedCart;
-    //                 }
-    //             });
-    //     // setCart([...cart,product]);    // was not updating cart as per present click ;;; giving output one step back
-    // }
 
 
     const hadleCartProduct = () => {
-        let existProduct = props.cart.some(value => value.id === product.id)
-        if (existProduct) {
-            toast.error(product.title + " already in cart");
-            return;
-        } else {
-            props.addToCartAction(product);
-            toast.success(product.title + " added in cart!!")
+        if (props.isAuthenticated) {
+            let existProduct = props.cart.some(value => value.id === product.id)
+            if (existProduct) {
+                toast.error(product.title + " already in cart");
+                return;
+            } else {
+                props.addToCartAction(product);
+                toast.success(product.title + " added in cart!!")
+            }
+        }
+        else {
+            toast.error("You have to login first")
+        navigate('/login');
         }
     }
 
     const handleWishlistProduct = () => {
-        let existProduct = props.wishlist.some(value => value.id === product.id)
-        if (existProduct) {
-            props.deleteToWishAction(product);
-            toast.error(product.title + " removed from wishlist");
-            return;
+        if (props.isAuthenticated) {
+
+            let existProduct = props.wishlist.some(value => value.id === product.id)
+            if (existProduct) {
+                props.deleteToWishAction(product.id);
+                toast.error(product.title + " removed from wishlist");
+                return;
+            }
+            else {
+                props.addToWishlistAction(product);
+                toast.success(product.title + " wishlisted!!")
+            }
+        } else {
+            toast.error("You have to login first")
+            navigate('/login'); 
         }
-        else {
-            props.addToWishlistAction(product);
-            toast.success(product.title + " wishlisted!!")
-        }
+
     }
 
-    // const handleAddToWishlist = (product) => {
-    //     if (!isAuthenticated) {
-    //         handleLoginRedirect();
-    //         return;
-    //     }
-    //     else {
-    //         addToWishlistAction(product);
-    //     }
-
-    //  setWishlist(prevWishlist => {
-    //      const isProductInWishlist = prevWishlist.some(wishlistItem => product.id === wishlistItem.id);
-    //      if (isProductInWishlist) {
-    //          toast.error(product.title + " removed from wishlist")
-    //          return prevWishlist.filter(wishlistItem => wishlistItem.id !== product.id);
-    //      } else {
-    //          localStorage.setItem("wishlength",wishlist.length + 1); 
-    //          toast.success(product.title + " wishlisted!!")
-    //          return [...prevWishlist, product];
-    //      }
-    //  });
-    // };
 
 
     return (
@@ -122,8 +67,8 @@ const ProductCard = (props) => {
                 <div className="wishlist-icon position-absolute top-0 end-0 m-2 p-3">
                     <FaHeart
                         onClick={handleWishlistProduct}
-                    // onClick={() => { addToWishlistAction(product) }}
-                    // style={{ color: isInWishlist ? 'red' : 'black', cursor: 'pointer' }}
+                        style={{ color: props.wishlist.some(value => value.id === product.id) ? 'maroon' : 'white', cursor: 'pointer' }}
+
                     />
                 </div>
 
@@ -144,14 +89,6 @@ const ProductCard = (props) => {
                     {/* </div> */}
 
                     <div className="card-name-buttons">
-                        {/* <Link to={`/product/${product.id}`} >
-                            <button
-                                className="btn btn-info ms-1"
-                            >
-                                More Details
-                            </button>
-                        </Link> */}
-
                         <button
                             className="btn btn-info ms-1"
                             onClick={() => navigate(`/product/${product.id}`)}
@@ -185,7 +122,7 @@ const mapDispatchToProps = (dispatch) => {
         {
             addToCartAction: addToCartSaga,
             addToWishlistAction: addToWishlistSaga,
-            deleteToWishAction : deleteToWishlistSaga
+            deleteToWishAction: deleteToWishlistSaga
         },
         dispatch
     );
