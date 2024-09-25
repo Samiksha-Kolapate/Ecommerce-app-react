@@ -25,7 +25,7 @@ const ProductDetailsCard = (props) => {
     return (
         <>
             <Metapage title={"product-details"}>
-                <div className="container my-5">
+                <div className="container my-5 mx-0">
                     <div className="row no-gutters align-items-stretch" style={{ margin: 0 }}>
                         <div className="col-lg-6 col-md-12 d-flex justify-content-end align-items-center" style={{ padding: 0, margin: 0 }}>
                             <img src={productData?.image}
@@ -37,7 +37,7 @@ const ProductDetailsCard = (props) => {
                         <div className="col-lg-6 col-md-12 d-flex flex-column justify-content-start" style={{ padding: 0 }}>
                             <div className="card h-100 border-0 shadow-sm rounded-0 bg-light">
                                 <div className="card-body">
-                                    <h5 className="card-title  text-dark mb-3 fs-3" style={{ fontWeight: '400' }}>{productData?.title}</h5>
+                                    <h5 className="card-title  text-success mb-3 fs-3" style={{ fontWeight: '400' }}>{productData?.title}</h5>
 
                                     <div className="d-flex align-items-center mb-2">
                                         {renderStars(productData?.rating?.rate)}
