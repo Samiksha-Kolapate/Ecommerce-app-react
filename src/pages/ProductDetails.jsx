@@ -11,8 +11,8 @@ const ProductDetails = () => {
 
     const getSingleProduct = async () => {
         try {
-            const response  = await axios.get(`https://fakestoreapi.com/products/${productId}`);
-            // const  response  = await axios.get(`https://api.escuelajs.co/api/v1/products/${productId}`);
+            // const response  = await axios.get(`https://fakestoreapi.com/products/${productId}`);
+            const  response  = await axios.get(`https://api.escuelajs.co/api/v1/products/${productId}`);
             console.log(response)
             setProductData(response.data);
         }

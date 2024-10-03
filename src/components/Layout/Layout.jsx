@@ -13,7 +13,7 @@ const Layout = (props) => {
         isAuthenticated={props.isAuthenticated}
         setIsAuthenticated={props.setIsAuthenticated}
       />
-      <main style={{ minHeight: '70vh ', margin: '8rem 0' }}>
+      <main style={{ minHeight: '60vh ', marginTop: "8rem",marginBottom:"4rem" }}>
         <Outlet />
       </main>
       <Footer />

@@ -58,7 +58,7 @@ const ProductCard = (props) => {
         <>
             <div className="card mx-3 my-4 p-3 position-relative" >
                 <img
-                    src={product.image}
+                    src={product.images}
                     className="card-img-top"
                     alt={product.title}
                 />
@@ -81,11 +81,9 @@ const ProductCard = (props) => {
                             })}
                         </h5>
                     </div>
-                    {/* <div> */}
                     <p className="card-text mb-2">
                         {product.description.substring(0, 100)}
                     </p>
-                    {/* </div> */}
 
                     <div className="card-name-buttons">
                         <button

@@ -339,3 +339,36 @@ export default ProductContainer;  */
 
 // proceed to buy  
     1. add page
+
+// categories
+// Login UI
+// Sign up UI
+// Logout UI
+
+
+// persist redux => e.g. cart, wishlist 
+// pagination
+// Add to cart button should be disabled
+// 
+
+
+// block element modifier
+// scss 
+
+
+// useMemo for rendering component one time like caching => componnent
+// useCallback => for function caching
+// useRef(like variable in js)uncontrolled(who dont render) and useState(controlled) difference
+// server side rendering for SEO purpose ke liye ip address file   ==>> gatsby
+// client side rendering application 
+// useEffect 
+
+// babel  transpiler
+// useState has one para which is initial value and it returns array and useEffect(componentDidmount if value in dep not present) componentDidupdate if value in dep  present
+// pure components in react
+// lifting state => child to parent change by function parent to child props(function) passing and change parents state
+// useReducer => action and state it takes
+
+// useRef => if you want to access the DOM you van do using this like want focus in html we do like document.getElementById() in react useRef
+
+// useHistory 

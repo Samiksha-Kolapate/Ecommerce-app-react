@@ -25,10 +25,10 @@ const ProductDetailsCard = (props) => {
     return (
         <>
             <Metapage title={"product-details"}>
-                <div className="container my-5 mx-0">
+                <div className="container mx-auto max-w-5xl px-5 py-24">
                     <div className="row no-gutters align-items-stretch" style={{ margin: 0 }}>
-                        <div className="col-lg-6 col-md-12 d-flex justify-content-end align-items-center" style={{ padding: 0, margin: 0 }}>
-                            <img src={productData?.image}
+                        <div className="col-lg-6 col-md-12 d-flex flex-column justify-content-end" style={{ padding: 0, margin: 0 }}>
+                            <img src={productData?.images}
                                 alt={productData?.title}
                                 className="img-fluid h-100 border-0 shadow-sm p-3 rounded-0 bg-light"
                                 style={{ objectFit: 'contain', maxHeight: '500px' }} />

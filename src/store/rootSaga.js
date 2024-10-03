@@ -2,7 +2,7 @@ import { all } from "redux-saga/effects";
 
 import { cartSagas, decrementQuantitySagas, deleteCartItemSaga, incrementQuantitySagas } from "./Cart/cart.saga";
 import { deleteWishlistItemSaga, wishlistSagas } from "./Wishlist/wishlist.saga";
-import { sagaProductList } from "./Products/product.saga"
+import { categoryListSaga, sagaProductList, searchProductListSaga } from "./Products/product.saga"
 
 
 function* rootSaga() {
@@ -14,6 +14,8 @@ function* rootSaga() {
         wishlistSagas(),
         deleteWishlistItemSaga(),
         sagaProductList(),
+        searchProductListSaga(),
+        categoryListSaga()
     ]);
 }
 
