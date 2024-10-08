@@ -1,95 +1,3 @@
-/* import React, { useState } from 'react'
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import { useNavigate, useLocation } from 'react-router-dom';     // hook
-import "../../styles/AuthStyles.css";
-import Metapage from '../../components/Layout/Metapage';
-
-
-
-const Login = ({setIsAuthenticated}) => {
-    const [formData, setFormData] = useState({
-        email:'',
-        password:'',
-    });
-
-    const [error, setError] = useState(null); 
-    const navigate = useNavigate();
-    
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();             // by preventing default will not refresh and single page app will stay as it is
-
-        try {
-            const response = await axios.post('https://api.escuelajs.co/api/v1/auth/login', {
-                email: formData.email,
-                password: formData.password,
-            });
-
-            localStorage.setItem('token', response.data.access_token);
-            localStorage.setItem('userEmail', formData.email);
-            setIsAuthenticated(true);
-            toast.success('Login successful');
-            navigate('/');
-        }  catch (err) {
-            const errorMessage = err.response?.data?.message || 'An error occurred';
-            
-            if (errorMessage.toLowerCase().includes("unauthorized")) {
-                toast.error('Invalid email or password. Please try again.');
-                navigate('/login');
-            }
-    
-            setError(errorMessage);
-        }
-    };
-
-    return (
-        <Metapage title="Login e-shopping">
-            <div className="form-container">
-                <form onSubmit={handleSubmit}>                        
-                    <h4 className="title">Login</h4>
-
-                    <div className="mb-3">
-                        <input type="email"
-                            name='email'
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="form-control"
-                            placeholder='Enter Your Email'
-                            required />
-                    </div>
-
-                    <div className="mb-3">
-                        <input type="password"
-                            name='password'
-                            value={formData.password}
-                            onChange={handleChange}
-                            className="form-control"
-                            placeholder='Enter Your Password'
-                            required />
-                    </div>
-                  
-                    <button type="submit" className="btn btn-primary">
-                        LOGIN
-                    </button>
-                </form>
-
-            </div>
-        </Metapage>
-    );
-};
-
-export default Login;
- */
-
-
-
 import React, { useState } from 'react'
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -105,8 +13,28 @@ const Login = ({ setIsAuthenticated }) => {
         password: '',
     });
 
-    const [error, setError] = useState(null);
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
+
+    const validateForm = () => {
+        let formErrors = {};
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!formData.email) {
+            formErrors.email = "Email is required";
+        } else if (!emailPattern.test(formData.email)) {
+            formErrors.email = "Enter a valid email address";
+        }
+
+        if (!formData.password) {
+            formErrors.password = "Password is required";
+        } else if (formData.password.length < 6) {
+            formErrors.password = "Password must be at least 6 characters long";
+        }
+
+        setErrors(formErrors);
+        return Object.keys(formErrors).length === 0; // If no errors, it return true
+    };
 
     const handleChange = (e) => {
         setFormData({
@@ -117,6 +45,10 @@ const Login = ({ setIsAuthenticated }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();             // by preventing default will not refresh and single page app will stay as it is
+
+        if (!validateForm()) {
+            return; // Exit if validation fails
+        }
 
         try {
             const response = await axios.post('https://api.escuelajs.co/api/v1/auth/login', {
@@ -137,13 +69,13 @@ const Login = ({ setIsAuthenticated }) => {
                 navigate('/login');
             }
 
-            setError(errorMessage);
+            setErrors(errorMessage);
         }
     };
 
     return (
         <Metapage title="Login e-shopping">
-           
+
             <section className="login">
                 <div className="container-fluid">
                     <div className="row justify-content-center mx-5 g-0">
@@ -157,13 +89,13 @@ const Login = ({ setIsAuthenticated }) => {
                                             id="form2Example18"
                                             value={formData.email}
                                             onChange={handleChange}
-                                            className="form-control form-control-lg border-0 border-bottom rounded-0"
+                                            className={`form-control form-control-lg border-0 border-bottom rounded-0 ${errors.email ? 'is-invalid' : ''}`}
                                             placeholder='Enter Email'
                                             style={{ boxShadow: 'none', outline: 'none' }}
-                                            required
+                                            
                                         />
-                                        <label className="form-label" htmlFor="form2Example18">
-                                        </label>
+                                        {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+
                                     </div>
 
                                     <div className="form-outline mb-4">
@@ -173,13 +105,13 @@ const Login = ({ setIsAuthenticated }) => {
                                             id="form2Example28"
                                             value={formData.password}
                                             onChange={handleChange}
-                                            className="form-control form-control-lg border-0 border-bottom rounded-0"
+                                            className={`form-control form-control-lg border-0 border-bottom rounded-0 ${errors.password ? 'is-invalid' : ''}`}
                                             placeholder='Enter Password'
                                             style={{ boxShadow: 'none', outline: 'none' }}
-                                            required
+                                            
                                         />
-                                        <label className="form-label" htmlFor="form2Example28">
-                                        </label>
+                                        {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+
                                     </div>
 
                                     <div className="pt-1 mb-4">
