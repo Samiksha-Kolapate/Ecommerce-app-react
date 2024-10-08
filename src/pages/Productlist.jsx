@@ -4,10 +4,8 @@ import { bindActionCreators } from "redux";
 import '../styles/Product.css'
 import Metapage from "../components/Layout/Metapage";
 import ProductCard from "../container/ProductCard";
-import { Checkbox } from "antd";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { categoryListActionSaga, sagaProductList } from "../store/Products/product.action.js"
+import { sagaProductList } from "../store/Products/product.action.js"
+import { Category } from "../components/Category.jsx";
 
 
 
@@ -15,17 +13,14 @@ const Productlist = (props) => {
     // const [checked, setChecked] = useState([]);
     const dispatch = useDispatch();
 
+
+
+
+
+    
     useEffect(() => {
         props.productApiAction();
     }, []);
-
-    const categories = [
-        { id: 1, name: "Clothes" },
-        { id: 2, name: "Electronics" },
-        { id: 3, name: "Furniture" },
-        { id: 4, name: "Footware" },
-        { id: 5, name: "Others" },
-    ];
 
     /* const handleFilter = (c_id) => {
         const checkedList = checked.includes(c_id) ? checked.filter((id) => id !== c_id) : [...checked, c_id];
@@ -44,17 +39,7 @@ const Productlist = (props) => {
             <Metapage title="Home - eShopping">
                 <div className="container-fluid row mt-3 home-page">
                     <div className="col-md-2 mx-3 filters">
-                        <h4 className="text-center mb-2">Filter By Category</h4>
-                        <div className="d-flex flex-column mb-3 p-3 g-1">
-                            {categories?.map((c) => (
-                                <Checkbox
-                                    key={c.id}
-                                    onChange={() => dispatch(categoryListActionSaga(c.id))}
-                                >
-                                    <h6 className="m-2"> {c.name} </h6>
-                                </Checkbox>
-                            ))}
-                        </div>
+                        <Category />
 
                         {/* <div className="d-flex flex-column">
                             {categories?.map((c) => (

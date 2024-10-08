@@ -20,8 +20,7 @@ const Layout = React.lazy(() => import("./components/Layout/Layout"));
 function App() {
 
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
-    const navigate = useNavigate();
-   
+    
    
     return (
         <> 

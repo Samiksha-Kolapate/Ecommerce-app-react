@@ -121,3 +121,15 @@
   align-items: center;
   height: 100vh; 
 }
+
+
+.dropdown-menu {
+  background-color: #f8f9fa; /* light background */
+  border: 1px solid #ddd; /* subtle border */
+  padding: 10px;
+}
+
+.dropdown-item {
+  padding: 10px 15px;
+  border-bottom: 1px solid #eaeaea;
+}

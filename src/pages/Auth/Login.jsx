@@ -125,7 +125,7 @@ const Login = ({ setIsAuthenticated }) => {
             });
 
             localStorage.setItem('token', response.data.access_token);
-            localStorage.setItem('userEmail', formData.email);
+            localStorage.setItem('userEmail', response.data.email);
             setIsAuthenticated(true);
             toast.success('Login successful');
             navigate('/');

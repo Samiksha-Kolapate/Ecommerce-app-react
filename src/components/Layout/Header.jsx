@@ -6,6 +6,7 @@ import { PiShoppingCartBold } from "react-icons/pi";
 import { FaHeart, FaYenSign } from 'react-icons/fa';
 import { connect } from "react-redux";
 import SearchInput from '../SearchInput';
+import Profile from '../Profile';
 
 
 const Header = (props) => {
@@ -16,9 +17,9 @@ const Header = (props) => {
     const [showLogoutModal, setShowLogoutModal] = useState(false);
 
     useEffect(() => {
-          const token = localStorage.getItem('token');
-          setIsAuthenticated(!!token);
-      }, [setIsAuthenticated]);
+        const token = localStorage.getItem('token');
+        setIsAuthenticated(!!token);
+    }, [setIsAuthenticated]);
 
     /* const handleLogout = () => {
         const confirmLogout = window.confirm("Are you sure you want to logout?");
@@ -30,26 +31,26 @@ const Header = (props) => {
         }
     }; */
 
-    const handleLogout = () => {
-            localStorage.removeItem('token');
-            localStorage.removeItem('userEmail');
-            setIsAuthenticated(false);
-            setShowLogoutModal(false);
-            navigate('/login');
+  /*   const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userEmail');
+        setIsAuthenticated(false);
+        setShowLogoutModal(false);
+        navigate('/login');
     };
 
     const toggleLogoutModal = () => {
         setShowLogoutModal(!showLogoutModal);
-    };
-
-
-   /*  const handleSearch = (event) => {
-        if (onSearch) {
-            onSearch(event.target.value);
-        } else {
-            console.warn("onSearch function is not defined.");
-        }
     }; */
+
+
+    /*  const handleSearch = (event) => {
+         if (onSearch) {
+             onSearch(event.target.value);
+         } else {
+             console.warn("onSearch function is not defined.");
+         }
+     }; */
 
 
     return (
@@ -78,8 +79,8 @@ const Header = (props) => {
                                         <NavLink to="/wishlist" className="nav-link">
                                             < FaHeart style={{ fontSize: '24px' }} />
                                             <sup>
-                                                {props.wishlist.length>0 && (
-                                                <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info"> {props.wishlist.length}</span>
+                                                {props.wishlist.length > 0 && (
+                                                    <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info"> {props.wishlist.length}</span>
                                                 )}
                                             </sup>
                                         </NavLink>
@@ -89,13 +90,13 @@ const Header = (props) => {
                                         <NavLink to="/cart" className="nav-link">
                                             <PiShoppingCartBold style={{ fontSize: '24px' }} />
                                             <sup>
-                                                {props.cart.length>0 && (
-                                            <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info"> {props.cart.length}</span>
+                                                {props.cart.length > 0 && (
+                                                    <span className="badge position-absolute top-0 start-100 translate-middle rounded-pill badge bg-info"> {props.cart.length}</span>
                                                 )}
                                             </sup>
                                         </NavLink>
                                     </li>
-                                   {/*  <li className='nav-item'>
+                                    {/*  <li className='nav-item'>
                                                 <Profile 
                                                 isAuthenticated = {props.isAuthenticated}
                                                 setIsAuthenticated = {props.setIsAuthenticated}
@@ -103,10 +104,24 @@ const Header = (props) => {
                                     </li> */}
 
                                     <li className="nav-item">
-                                        <button className="nav-link btn" onClick={toggleLogoutModal}>Logout</button>
+                                        {/* <button className="nav-link btn" onClick={toggleLogoutModal}>Logout</button> */}
                                     </li>
 
-                                   
+                                    <li className='d-flex justify-content-center align-items-center nav-item dropdown'>
+                                        
+                                        <NavLink
+                                        className='nav-link dropdown-toggle'
+                                        to="/profile"
+                                        data-bs-toggle="dropdown"
+                                        >
+                                            Profile
+                                            <Profile 
+                                            isAuthenticated = {props.isAuthenticated}
+                                            setIsAuthenticated = {props.setIsAuthenticated}
+                                            // toggleLogoutModal = {props.toggleLogoutModal}
+                                            />
+                                        </NavLink>
+                                    </li>
                                 </>
                             ) : (
                                 <>
@@ -126,7 +141,7 @@ const Header = (props) => {
                     </div>
                 </div>
             </nav>
-
+{/* 
             <div className={`modal fade ${showLogoutModal ? 'show d-block' : ''}`} tabIndex="-1" role="dialog" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
@@ -143,17 +158,17 @@ const Header = (props) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }
 
 const mapStateToProps = (state) => {
-    
+
     return {
-       cart : state.cartProduct.cart,
-       wishlist : state.wishlistProduct.wishlist
+        cart: state.cartProduct.cart,
+        wishlist: state.wishlistProduct.wishlist
     };
-  };
-  
-  export default connect(mapStateToProps)(Header);
+};
+
+export default connect(mapStateToProps)(Header);
