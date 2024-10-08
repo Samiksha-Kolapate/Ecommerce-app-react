@@ -47,9 +47,17 @@ export function* decrementQuantitySagas(){
   yield takeLatest("DECREMENT_QUANTITY_SAGA", decrementQuantitySaga)
 }
 
+function* clearCartSaga(payload){
+  yield put ({
+    type: "CLEAR_CART",
+    // payload: payload.payload
+  });
+}
 
 
-
+export function* clearCartSagas(){
+  yield takeLatest("CLEAR_CART_SAGA", clearCartSaga)
+}
 
 
 

@@ -56,6 +56,21 @@ const decrementQuantitySaga = (product) => {
     }
 }
 
+const clearCart = () => {
+    return {
+        type: "CLEAR_CART",
+        // payload: product
+    }
+}
+
+const clearCartSaga = () => {
+    return {
+        type: "CLEAR_CART_SAGA",
+        // payload: product
+    }
+}
+
+
 export {
     addToCart,
     addToCartSaga,
@@ -64,7 +79,9 @@ export {
     incrementQuantity,
     incrementQuantitySaga,
     decrementQuantity,
-    decrementQuantitySaga
+    decrementQuantitySaga,
+    clearCart,
+    clearCartSaga
 }
 
 
