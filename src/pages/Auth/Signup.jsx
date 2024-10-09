@@ -90,7 +90,7 @@ const Signup = () => {
                       onChange={handleChange}
                       className={`form-control form-control-lg border-0 border-bottom rounded-0 ${errors.name ? 'is-invalid' : ''}`}
                       placeholder="Enter Name"
-                      
+                      style={{ boxShadow: 'none', outline: 'none' }}
                     />
                     {errors.name && <div className="invalid-feedback">{errors.name}</div>}
                   </div>
@@ -103,7 +103,7 @@ const Signup = () => {
                       onChange={handleChange}
                       className={`form-control form-control-lg border-0 border-bottom rounded-0 ${errors.email ? 'is-invalid' : ''}`}
                       placeholder="Enter Email"
-                      
+                      style={{ boxShadow: 'none', outline: 'none' }}
                     />
                     {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                   </div>
@@ -116,6 +116,7 @@ const Signup = () => {
                       onChange={handleChange}
                       className={`form-control form-control-lg border-0 border-bottom rounded-0 ${errors.password ? 'is-invalid' : ''}`}
                       placeholder="Enter Password"
+                      style={{ boxShadow: 'none', outline: 'none' }}
                       
                     />
                     {errors.password && <div className="invalid-feedback">{errors.password}</div>}
@@ -129,6 +130,7 @@ const Signup = () => {
                       onChange={handleChange}
                       className={`form-control form-control-lg border-0 border-bottom rounded-0 ${errors.confirmPassword ? 'is-invalid' : ''}`}
                       placeholder="Confirm Password"
+                      style={{ boxShadow: 'none', outline: 'none' }}
                       
                     />
                     {errors.confirmPassword && <div className="invalid-feedback">{errors.confirmPassword}</div>}

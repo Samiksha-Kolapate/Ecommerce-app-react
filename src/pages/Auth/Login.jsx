@@ -137,7 +137,6 @@ const Login = ({ setIsAuthenticated }) => {
                                             </a>
                                         </p>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -153,9 +152,6 @@ const Login = ({ setIsAuthenticated }) => {
                     </div>
                 </div>
             </section>
-
-
-
         </Metapage>
     );
 };

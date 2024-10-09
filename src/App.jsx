@@ -6,6 +6,9 @@ import './index.css';
 import Spinner from "./components/Spinner";
 import PrivateRoute from "./routes/PrivateRoute";
 import Pagenotfound from "./pages/Pagenotfound";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Policy from "./pages/policy";
 const Productlist = React.lazy(() => import("./pages/Productlist"));
 const ProductDetails = React.lazy(() => import("./pages/ProductDetails"));
 const Cart = React.lazy(() => import("./pages/Cart"));
@@ -50,6 +53,9 @@ function App() {
                         <Route path="product/:productId" element={<ProductDetails />} />
                         <Route path="/cart" element={<Cart />} />
                         <Route path="/wishlist" element={<Wishlist />} />
+                        <Route path="/about" element = {<About/>} />
+                        <Route path="/contact" element = {<Contact/>} />
+                        <Route path="/policy" element={<Policy/>} />
 
                     </Route>
                     <Route path="/*" element = {<Pagenotfound />} />
