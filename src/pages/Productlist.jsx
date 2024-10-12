@@ -1,66 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import '../styles/Product.css'
 import Metapage from "../components/Layout/Metapage";
 import ProductCard from "../container/ProductCard";
-import { sagaProductList } from "../store/Products/product.action.js"
+import { sagaProductList } from "../store/Products/ProductAction.js"
 import { Category } from "../components/Category.jsx";
-
-
+import {  FaChevronDown } from "react-icons/fa";
 
 const Productlist = (props) => {
-    // const [checked, setChecked] = useState([]);
-    const dispatch = useDispatch();
-
-
-
-
-
+    const [pagination, setPagination] = useState(10);
     
-    useEffect(() => {
-        props.productApiAction();
-    }, []);
-
-    /* const handleFilter = (c_id) => {
-        const checkedList = checked.includes(c_id) ? checked.filter((id) => id !== c_id) : [...checked, c_id];
-        setChecked(checkedList);
-
-        if (checkedList.length > 0) {
-            dispatch(categoryListActionSaga(checkedList));
+    const handlePagination = () => {
+        if(pagination == 30){
+            return setPagination(0);
         }
-        else {
-            dispatch(props.productApiAction());
-        }
+        setPagination(pagination+10);
     };
- */
+
+    useEffect(() => {
+        props.productApiAction(pagination);
+    }, [pagination]);
+
     return (
         <>
             <Metapage title="Home - eShopping">
-                <div className="container-fluid row mt-3 home-page">
-                    <div className="col-md-2 mx-3 filters">
+                <div className="container-fluid row mt-2 home-page">
+                    <div className="col-md-2 mx-3 ">
                         <Category />
-
-                        {/* <div className="d-flex flex-column">
-                            {categories?.map((c) => (
-                                <Checkbox
-                                    key={c.id}
-                                    onChange={() => handleFilter(c.id)}
-                                    checked={checked.includes(c.id)}
-                                >
-                                    {c.name}
-                                </Checkbox>
-                            ))}
-                        </div> */}
-                        
-                        {/* <div className="d-flex flex-column">
-                            <button
-                                className="btn btn-danger"
-                                onClick={() => window.location.reload()}
-                            >
-                                Reset Filters
-                            </button>
-                        </div> */}
                     </div>
 
                     <div className="col-md-9 mx-4 justify-content-center">
@@ -78,17 +45,18 @@ const Productlist = (props) => {
                                 })
                             }
                         </div>
-
+                        <div className="d-flex justify-content-center">
+                            <li 
+                            className=" d-flex align-item-center h4 text-success cursor-pointer"
+                            onClick={handlePagination}
+                            >Load more  <i className="mx-2"><FaChevronDown /></i> </li>
+                        </div>
                     </div>
                 </div>
-
             </ Metapage>
-
         </>
     )
 }
-
-
 
 const mapStateToProps = (state) => {
     return {

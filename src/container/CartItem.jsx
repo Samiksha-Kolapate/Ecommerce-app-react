@@ -1,6 +1,6 @@
 import React from "react";
 import { connect, useDispatch } from "react-redux";
-import { decrementQuantity, deleteToCartSaga, incrementQuantity } from "../store/Cart/cart.action";
+import { decrementQuantity, deleteToCartSaga, incrementQuantity } from "../store/Cart/CartAction.js";
 
 function CartItem(props) {
   const dispatch = useDispatch();
@@ -32,12 +32,10 @@ function CartItem(props) {
                     <h5 className="card-title text-bold mb-3 fs-3">{product.title}</h5>
                     <p className="card-text mb-2 fs-5">
                       <small className="text-muted">
-                        {/* <del>₹ {product.originalPrice}</del> */}
                       </small>
                       &nbsp;&nbsp;
                       <span className="text-success">₹{product.price}</span>
                       &nbsp;&nbsp;
-                      {/* <span className="badge bg-success ">{product.discount}</span> */}
                     </p>
                     <div className="d-flex align-items-center mt-3">
                       <button

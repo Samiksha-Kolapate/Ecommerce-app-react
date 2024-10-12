@@ -1,13 +1,11 @@
 import React from 'react'
 import { FaHeart } from 'react-icons/fa';
-import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import { addToCartSaga } from '../store/Cart/cart.action';
-import { addToWishlistSaga, deleteToWishlistSaga } from '../store/Wishlist/wishlist.action';
-
+import { addToCartSaga } from '../store/Cart/CartAction.js';
+import { addToWishlistSaga, deleteToWishlistSaga } from '../store/Wishlist/WishlistAction.js';
 
 const ProductCard = (props) => {
     // const { product, index, wishlist, cart, setCart, setWishlist, isAuthenticated, handleLoginRedirect, addToCartAction, addToWishlistAction } = props;
@@ -52,8 +50,6 @@ const ProductCard = (props) => {
         }
     }
 
-
-
     return (
         <>
             <div className="card mx-3 my-4 p-3 position-relative" >
@@ -67,7 +63,6 @@ const ProductCard = (props) => {
                     <FaHeart
                         onClick={handleWishlistProduct}
                         style={{ color: props.wishlist.some(value => value.id === product.id) ? 'maroon' : 'white', cursor: 'pointer' }}
-
                     />
                 </div>
 

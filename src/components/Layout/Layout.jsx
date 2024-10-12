@@ -4,7 +4,6 @@ import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 
-
 const Layout = (props) => {
 
   return (
@@ -20,8 +19,5 @@ const Layout = (props) => {
     </div>
   );
 };
-
-
-
 
 export default Layout;

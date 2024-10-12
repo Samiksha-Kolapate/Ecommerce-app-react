@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CartItem from "../container/CartItem";
 import { connect } from "react-redux";
 import Metapage from "../components/Layout/Metapage";
-import { clearCartSaga } from "../store/Cart/cart.action";
+import { clearCartSaga } from "../store/Cart/CartAction.js";
 import { bindActionCreators } from "redux";
 
 function Cart(props) {

@@ -1,6 +1,5 @@
 const initialState = {
     ListOfItems: [],
-    checked: [],
   };
   
   const productReducer = (state = initialState, action) => {

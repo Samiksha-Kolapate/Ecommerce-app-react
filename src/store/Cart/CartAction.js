@@ -26,8 +26,6 @@ const deleteToCartSaga = (product) => {
     }
 }
 
-
-
 const incrementQuantity = (product) => {
     return {
         type: "INCREMENT_QUANTITY",
@@ -69,7 +67,6 @@ const clearCartSaga = () => {
         // payload: product
     }
 }
-
 
 export {
     addToCart,

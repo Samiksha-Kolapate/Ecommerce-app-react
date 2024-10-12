@@ -1,12 +1,12 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import {productData,handleSearchApi,handleCategoryApi} from "../Products/productApi";
+import {productData,handleSearchApi,handleCategoryApi} from "./ProductApi.js";
 
 
-function* productList() {
-    const response = yield call(productData)
+function* productList(action) {
+    const response = yield call(productData,action.payload)
     yield put ({
         type : "PRODUCT_LIST",
-        payload : response.slice(0,20)
+        payload : response
     })
 }
 

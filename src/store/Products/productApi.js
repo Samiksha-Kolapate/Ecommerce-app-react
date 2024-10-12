@@ -1,10 +1,9 @@
 import axios from "axios";
 
-
-export const productData = async () => {
+export const productData = async (pagination) => {
     try {
       // const res = await axios.get("https://fakestoreapi.com/products");
-     const res = await axios.get("https://api.escuelajs.co/api/v1/products?offset=0&limit=10");
+     const res = await axios.get(`https://api.escuelajs.co/api/v1/products?offset=0&limit=${pagination}`);
      return res.data
     } catch (error) {
       console.log(error);

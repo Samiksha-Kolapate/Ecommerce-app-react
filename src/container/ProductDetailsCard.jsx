@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addToCartSaga } from '../store/Cart/cart.action';
+import { addToCartSaga } from '../store/Cart/CartAction.js';
 import Metapage from '../components/Layout/Metapage';
-import { FaStar, FaStarHalfAlt } from 'react-icons/fa'; // Import star icons
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa'; 
 
 const ProductDetailsCard = (props) => {
     const { productData } = props;
@@ -16,7 +16,7 @@ const ProductDetailsCard = (props) => {
           } else if (i < rating) {
             stars.push(<FaStarHalfAlt key={i} className="text-warning" />);
           } else {
-            stars.push(<FaStar key={i} className="text-muted" />); // Empty star
+            stars.push(<FaStar key={i} className="text-muted" />);
           }
         }
         return stars;
@@ -50,8 +50,6 @@ const ProductDetailsCard = (props) => {
 
                                     <p className="card-text mb-2 fs-6">{productData?.description}</p>
 
-                                    
-
                                     <button
                                         className="btn btn-primary mt-3"
                                         onClick={() => dispatch(addToCartSaga(productData))}>
@@ -66,6 +64,5 @@ const ProductDetailsCard = (props) => {
         </>
     );
 }
-
 
 export default ProductDetailsCard;

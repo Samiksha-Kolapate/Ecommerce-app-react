@@ -42,7 +42,7 @@ const Signup = () => {
     }
 
     setErrors(formErrors);
-    return Object.keys(formErrors).length === 0; // If no errors, it return true
+    return Object.keys(formErrors).length === 0; 
   };
 
   const handleChange = (e) => {
@@ -56,7 +56,7 @@ const Signup = () => {
     e.preventDefault();
 
     if (!validateForm()) {
-      return; // Exit if validation fails
+      return; 
     }
 
     try {

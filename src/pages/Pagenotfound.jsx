@@ -1,18 +1,3 @@
-/* import React from 'react'
-import Layout from '../components/Layout/Layout'
-
-const Pagenotfound = () => {
-  return (
-    <Layout>
-      <h1>Page Not Found</h1>
-    </Layout>
-  )
-}
-
-export default Pagenotfound
- */
-
-
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Metapage from "../components/Layout/Metapage";

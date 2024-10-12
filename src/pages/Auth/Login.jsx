@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { useNavigate, useLocation } from 'react-router-dom';     // hook
-// import "../../styles/AuthStyles.css";
+import { useNavigate } from 'react-router-dom';     
 import Metapage from '../../components/Layout/Metapage';
 
 
@@ -33,7 +32,7 @@ const Login = ({ setIsAuthenticated }) => {
         }
 
         setErrors(formErrors);
-        return Object.keys(formErrors).length === 0; // If no errors, it return true
+        return Object.keys(formErrors).length === 0; 
     };
 
     const handleChange = (e) => {
@@ -44,10 +43,9 @@ const Login = ({ setIsAuthenticated }) => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();             // by preventing default will not refresh and single page app will stay as it is
-
+        e.preventDefault();           
         if (!validateForm()) {
-            return; // Exit if validation fails
+            return; 
         }
 
         try {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { NavLink, Link, useNavigate } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import logo from '/images/logo.png'
 import { PiShoppingCartBold } from "react-icons/pi";
 import { FaHeart, FaYenSign } from 'react-icons/fa';
@@ -13,46 +13,12 @@ const Header = (props) => {
 
     const { isAuthenticated, setIsAuthenticated } = props;
 
-    const navigate = useNavigate();
-    const [showLogoutModal, setShowLogoutModal] = useState(false);
-
     useEffect(() => {
         const token = localStorage.getItem('token');
         setIsAuthenticated(!!token);
     }, [setIsAuthenticated]);
 
-    /* const handleLogout = () => {
-        const confirmLogout = window.confirm("Are you sure you want to logout?");
-        if(confirmLogout){
-            localStorage.removeItem('token');
-            localStorage.removeItem('userEmail');
-            setIsAuthenticated(false);
-            navigate('/login');
-        }
-    }; */
-
-  /*   const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userEmail');
-        setIsAuthenticated(false);
-        setShowLogoutModal(false);
-        navigate('/login');
-    };
-
-    const toggleLogoutModal = () => {
-        setShowLogoutModal(!showLogoutModal);
-    }; */
-
-
-    /*  const handleSearch = (event) => {
-         if (onSearch) {
-             onSearch(event.target.value);
-         } else {
-             console.warn("onSearch function is not defined.");
-         }
-     }; */
-
-
+    
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
@@ -96,17 +62,6 @@ const Header = (props) => {
                                             </sup>
                                         </NavLink>
                                     </li>
-                                    {/*  <li className='nav-item'>
-                                                <Profile 
-                                                isAuthenticated = {props.isAuthenticated}
-                                                setIsAuthenticated = {props.setIsAuthenticated}
-                                                />
-                                    </li> */}
-
-                                    <li className="nav-item">
-                                        {/* <button className="nav-link btn" onClick={toggleLogoutModal}>Logout</button> */}
-                                    </li>
-
                                     <li className='d-flex justify-content-center align-items-center nav-item dropdown'>
                                         
                                         <NavLink
@@ -118,7 +73,6 @@ const Header = (props) => {
                                             <Profile 
                                             isAuthenticated = {props.isAuthenticated}
                                             setIsAuthenticated = {props.setIsAuthenticated}
-                                            // toggleLogoutModal = {props.toggleLogoutModal}
                                             />
                                         </NavLink>
                                     </li>
@@ -141,24 +95,6 @@ const Header = (props) => {
                     </div>
                 </div>
             </nav>
-{/* 
-            <div className={`modal fade ${showLogoutModal ? 'show d-block' : ''}`} tabIndex="-1" role="dialog" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">Confirm Logout</h5>
-                            <button type="button" className="btn-close" onClick={toggleLogoutModal} aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <p>Are you sure you want to log out?</p>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" onClick={toggleLogoutModal}>Cancel</button>
-                            <button type="button" className="btn btn-danger" onClick={handleLogout}>Logout</button>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
         </>
     )
 }

@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
-import { searchProductListSaga } from '../store/Products/product.action';
-
+import { searchProductListSaga } from '../store/Products/ProductAction.js';
 
 const SearchInput = () => {
-
   const [searchQuery, setSearchQuery] = useState([]);
   const dispatch = useDispatch();
-
 
   const handleSearch = (event) => {
     let value = event.target.value;
@@ -22,32 +19,6 @@ const SearchInput = () => {
 
     return () => clearTimeout(getProduct);
   }, [searchQuery]);
-
-  /* 
-    const getAllProducts = async () => {
-      try {
-        const { data } = await axios.get('https://fakestoreapi.com/products');
-        setProducts(data);
-        setFilteredProducts(data);
-      } catch (error) {
-        toast.error('Something went wrong');
-      }
-    };
-   */
-  /*  useEffect(() => {
-     getAllProducts();
-   }, []); */
-
-  /*  const handleSearch = (query) => {
-     if (query) {
-       const filtered = products.filter(product =>
-         product.title.toLowerCase().includes(query.toLowerCase())
-       );
-       setFilteredProducts(filtered);
-     } else {
-       setFilteredProducts(products); // Reset to all products if query is empty
-     }
-   }; */
 
   return (
     <>

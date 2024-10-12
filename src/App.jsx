@@ -8,7 +8,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import Pagenotfound from "./pages/Pagenotfound";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Policy from "./pages/policy";
+import Policy from "./pages/Policy";
 const Productlist = React.lazy(() => import("./pages/Productlist"));
 const ProductDetails = React.lazy(() => import("./pages/ProductDetails"));
 const Cart = React.lazy(() => import("./pages/Cart"));

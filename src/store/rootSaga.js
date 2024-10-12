@@ -1,8 +1,8 @@
 import { all } from "redux-saga/effects";
 
-import { cartSagas, clearCartSagas, decrementQuantitySagas, deleteCartItemSaga, incrementQuantitySagas } from "./Cart/cart.saga";
-import { deleteWishlistItemSaga, wishlistSagas } from "./Wishlist/wishlist.saga";
-import { categoryListSaga, sagaProductList, searchProductListSaga } from "./Products/product.saga"
+import { cartSagas, clearCartSagas, decrementQuantitySagas, deleteCartItemSaga, incrementQuantitySagas } from "./Cart/CartSaga.js";
+import { deleteWishlistItemSaga, wishlistSagas } from "./Wishlist/WishlistSaga.js";
+import { categoryListSaga, sagaProductList, searchProductListSaga } from "./Products/ProductSaga.js"
 
 
 function* rootSaga() {

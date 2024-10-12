@@ -338,7 +338,7 @@ export default ProductContainer;  */
     3. redux maintain
 
 // proceed to buy  
-    1. add page
+    1. add page 
 
 // categories
 // Login UI
@@ -351,9 +351,16 @@ export default ProductContainer;  */
 // Add to cart button should be disabled
 // 
 
+checkout => done
+validation => done
+profile => done
+
+pagination => not done
+
 
 // block element modifier
 // scss 
+
 
 
 // useMemo for rendering component one time like caching => componnent

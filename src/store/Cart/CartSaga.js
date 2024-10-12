@@ -17,7 +17,6 @@ function* deleteToCartSaga(payload){
   });
 }
 
-
 export function* deleteCartItemSaga(){
   yield takeLatest("DELETE_TO_CART_SAGA", deleteToCartSaga)
 }
@@ -29,11 +28,9 @@ function* incrementQuantitySaga(payload){
   });
 }
 
-
 export function* incrementQuantitySagas(){
   yield takeLatest("INCREMENT_QUANTITY_SAGA", incrementQuantitySaga)
 }
-
 
 function* decrementQuantitySaga(payload){
   yield put({
@@ -47,10 +44,9 @@ export function* decrementQuantitySagas(){
   yield takeLatest("DECREMENT_QUANTITY_SAGA", decrementQuantitySaga)
 }
 
-function* clearCartSaga(payload){
+function* clearCartSaga(){
   yield put ({
     type: "CLEAR_CART",
-    // payload: payload.payload
   });
 }
 
