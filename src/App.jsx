@@ -50,7 +50,10 @@ function App() {
                                 <Signup />
                             </PrivateRoute>
                         } />
-                        <Route path="product/:productId" element={<ProductDetails />} />
+                        <Route path="product/:productId" element={<ProductDetails 
+                                                        isAuthenticated={isAuthenticated}
+                                                        setIsAuthenticated={setIsAuthenticated}
+                                                        />} />
                         <Route path="/cart" element={<Cart />} />
                         <Route path="/wishlist" element={<Wishlist />} />
                         <Route path="/about" element = {<About/>} />

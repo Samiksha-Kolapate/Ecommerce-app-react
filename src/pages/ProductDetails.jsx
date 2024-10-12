@@ -4,7 +4,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import ProductDetailsCard from "../container/ProductDetailsCard";
 
-const ProductDetails = () => {
+const ProductDetails = (props) => {
 
     const { productId } = useParams();
     const [productData, setProductData] = useState({});
@@ -12,7 +12,7 @@ const ProductDetails = () => {
     const getSingleProduct = async () => {
         try {
             // const response  = await axios.get(`https://fakestoreapi.com/products/${productId}`);
-            const  response  = await axios.get(`https://api.escuelajs.co/api/v1/products/${productId}`);
+            const response = await axios.get(`https://api.escuelajs.co/api/v1/products/${productId}`);
             console.log(response)
             setProductData(response.data);
         }
@@ -25,16 +25,20 @@ const ProductDetails = () => {
         getSingleProduct();
     }, [productId]);
 
- /*   
-    if (!productData) {
-        return <div>Loading...</div>;
-    }
- */
-  useEffect(() => {}, [productData]);
+    /*   
+       if (!productData) {
+           return <div>Loading...</div>;
+       }
+    */
+    useEffect(() => { }, [productData]);
 
     return (
         <>
-            <ProductDetailsCard productData={productData}/>
+            <ProductDetailsCard
+                productData={productData}
+                isAuthenticated={props.isAuthenticated}
+                setIsAuthenticated={props.setIsAuthenticated}
+            />
         </>
     );
 };

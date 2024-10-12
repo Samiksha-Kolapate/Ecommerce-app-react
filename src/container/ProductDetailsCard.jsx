@@ -1,12 +1,15 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import toast from "react-hot-toast";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { addToCartSaga } from '../store/Cart/CartAction.js';
 import Metapage from '../components/Layout/Metapage';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa'; 
+import { useNavigate } from 'react-router-dom';
 
 const ProductDetailsCard = (props) => {
     const { productData } = props;
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const renderStars = (rating) => {
         const stars = [];
@@ -21,6 +24,23 @@ const ProductDetailsCard = (props) => {
         }
         return stars;
       };
+
+      const hadleCartProduct = () => {
+        if (props.isAuthenticated) {
+            let existProduct = props.cart.some(value => value.id === productData.id)
+            if (existProduct) {
+                toast.error(productData.title + " already in cart");
+                return;
+            } else {
+                props.addToCartAction(productData);
+                toast.success(productData.title + " added in cart!!")
+            }
+        }
+        else {
+            toast.error("You have to login first")
+        navigate('/login');
+        }
+    }
 
     return (
         <>
@@ -52,7 +72,7 @@ const ProductDetailsCard = (props) => {
 
                                     <button
                                         className="btn btn-primary mt-3"
-                                        onClick={() => dispatch(addToCartSaga(productData))}>
+                                        onClick={hadleCartProduct}>
                                         Move to Cart
                                     </button>
                                 </div>
@@ -65,4 +85,19 @@ const ProductDetailsCard = (props) => {
     );
 }
 
-export default ProductDetailsCard;
+const mapStateToProps = (state) => {
+    return {
+        cart: state.cartProduct.cart,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators(
+        {
+            addToCartAction: addToCartSaga,
+        },
+        dispatch
+    );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetailsCard);
