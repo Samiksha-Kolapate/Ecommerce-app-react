@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';     
-import Metapage from '../../components/Layout/Metapage';
+import Metapage from '../../Components/common/Metapage';
 
 
 

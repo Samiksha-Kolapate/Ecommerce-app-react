@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import '../styles/Product.css'
-import Metapage from "../components/Layout/Metapage";
-import ProductCard from "../container/ProductCard";
-import { sagaProductList } from "../store/Products/ProductAction.js"
-import { Category } from "../components/Category.jsx";
+import '../Styles/Product.css'
+import Metapage from "../Components/common/Metapage";
+import ProductCard from "../Container/ProductCard.jsx";
+import { sagaProductList } from "../Store/Products/productAction.js"
+import { Category } from "../Components/Category.jsx";
 import {  FaChevronDown } from "react-icons/fa";
 
-const Productlist = (props) => {
+const Home = (props) => {
     const [pagination, setPagination] = useState(10);
     
     const handlePagination = () => {
@@ -47,7 +47,7 @@ const Productlist = (props) => {
                         </div>
                         <div className="d-flex justify-content-center">
                             <li 
-                            className=" d-flex align-item-center h4 text-success cursor-pointer"
+                            className=" d-flex align-item-center h4 text-success cursor-pointer bottom-0"
                             onClick={handlePagination}
                             >Load more  <i className="mx-2"><FaChevronDown /></i> </li>
                         </div>
@@ -73,5 +73,5 @@ const mapDispatchToProps = (dispatch) => {
     );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Productlist);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 

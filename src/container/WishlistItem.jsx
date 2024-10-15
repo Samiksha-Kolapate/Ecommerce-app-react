@@ -2,8 +2,8 @@ import React from "react";
 import toast from "react-hot-toast"; 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { addToCartSaga } from "../store/Cart/CartAction.js";
-import { deleteToWishlistSaga } from "../store/Wishlist/WishlistAction.js";
+import { addToCartSaga } from "../Store/Cart/cartAction.js";
+import { deleteToWishlistSaga } from "../Store/Wishlist/wishlistAction.js";
 
 
 function WishlistItem(props) {

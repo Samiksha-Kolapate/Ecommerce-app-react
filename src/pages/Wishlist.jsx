@@ -1,7 +1,7 @@
 import React from 'react'
-import Metapage from '../components/Layout/Metapage'
+import Metapage from "../Components/common/Metapage";
 import { connect } from "react-redux";
-import WishlistItem from '../container/WishlistItem';
+import WishlistItem from '../Container/WishlistItem';
 
 
 const Wishlist = (props) => {

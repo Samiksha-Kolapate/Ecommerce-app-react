@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import {productData,handleSearchApi,handleCategoryApi} from "./ProductApi.js";
+import {productData,handleSearchApi,handleCategoryApi} from "./productApi.js";
 
 
 function* productList(action) {

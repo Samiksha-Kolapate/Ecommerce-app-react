@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import CartItem from "../container/CartItem";
+import CartItem from "../Container/CartItem.jsx";
 import { connect } from "react-redux";
-import Metapage from "../components/Layout/Metapage";
-import { clearCartSaga } from "../store/Cart/CartAction.js";
+import Metapage from "../Components/common/Metapage";
+import { clearCartSaga } from "../Store/Cart/cartAction.js";
 import { bindActionCreators } from "redux";
 
 function Cart(props) {

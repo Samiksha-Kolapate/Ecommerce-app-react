@@ -5,8 +5,8 @@ import logo from '/images/logo.png'
 import { PiShoppingCartBold } from "react-icons/pi";
 import { FaHeart, FaYenSign } from 'react-icons/fa';
 import { connect } from "react-redux";
-import SearchInput from '../SearchInput';
-import Profile from '../Profile';
+import SearchInput from "./SearchInput"
+import Profile from './Profile';
 
 
 const Header = (props) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { categoryListActionSaga, sagaProductList } from '../store/Products/ProductAction.js';
+import { categoryListActionSaga, sagaProductList } from '../Store/Products/productAction.js';
 
 export const Category = () => {
     const dispatch = useDispatch();

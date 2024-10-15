@@ -1,6 +1,6 @@
 import React from "react";
 import { connect, useDispatch } from "react-redux";
-import { decrementQuantity, deleteToCartSaga, incrementQuantity } from "../store/Cart/CartAction.js";
+import { decrementQuantity, deleteToCartSaga, incrementQuantity } from "../Store/Cart/cartAction.js";
 
 function CartItem(props) {
   const dispatch = useDispatch();

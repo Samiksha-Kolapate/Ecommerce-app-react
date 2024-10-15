@@ -1,5 +1,5 @@
 import React from "react";
-import Metapage from "../components/Layout/Metapage";
+import Metapage from "../Components/common/Metapage";
 
 const Policy = () => {
   return (

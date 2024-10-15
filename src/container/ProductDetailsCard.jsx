@@ -2,8 +2,8 @@ import React from 'react';
 import toast from "react-hot-toast";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addToCartSaga } from '../store/Cart/CartAction.js';
-import Metapage from '../components/Layout/Metapage';
+import { addToCartSaga } from '../Store/Cart/cartAction.js';
+import Metapage from '../Components/common/Metapage.jsx';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa'; 
 import { useNavigate } from 'react-router-dom';
 

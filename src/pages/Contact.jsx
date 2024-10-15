@@ -1,6 +1,6 @@
 import React from "react";
 import { BiMailSend, BiPhoneCall, BiSupport } from "react-icons/bi";
-import Metapage from "../components/Layout/Metapage";
+import Metapage from "../Components/common/Metapage";
 
 const Contact = () => {
   return (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
-import { searchProductListSaga } from '../store/Products/ProductAction.js';
+import { searchProductListSaga } from '../Store/Products/productAction.js';
 
 const SearchInput = () => {
   const [searchQuery, setSearchQuery] = useState([]);

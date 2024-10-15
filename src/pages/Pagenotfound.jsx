@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Metapage from "../components/Layout/Metapage";
+import Metapage from "../Components/common/Metapage";
 
 const Pagenotfound = () => {
   return (

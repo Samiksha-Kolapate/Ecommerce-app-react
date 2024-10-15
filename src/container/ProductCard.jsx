@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import { addToCartSaga } from '../store/Cart/CartAction.js';
-import { addToWishlistSaga, deleteToWishlistSaga } from '../store/Wishlist/WishlistAction.js';
+import { addToCartSaga } from '../Store/Cart/cartAction.js';
+import { addToWishlistSaga, deleteToWishlistSaga } from '../Store/Wishlist/wishlistAction.js';
 
 const ProductCard = (props) => {
     // const { product, index, wishlist, cart, setCart, setWishlist, isAuthenticated, handleLoginRedirect, addToCartAction, addToWishlistAction } = props;
