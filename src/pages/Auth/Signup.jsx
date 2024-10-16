@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import "../../Styles/AuthStyles.css";
 import Metapage from '../../Components/common/Metapage';
+import { API_ENDPOINTS } from '../../Shared/config';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -60,7 +61,7 @@ const Signup = () => {
     }
 
     try {
-      const response = await axios.post('https://api.escuelajs.co/api/v1/users/', {
+      const response = await axios.post(API_ENDPOINTS.signUpApi, {
         name: formData.name,
         email: formData.email,
         password: formData.password,

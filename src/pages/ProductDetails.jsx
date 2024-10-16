@@ -17,7 +17,7 @@ const ProductDetails = (props) => {
             setProductData(response.data);
         }
         catch (error) {
-            toast.error("Failed to load product details")
+            toast.error("Failed to load product details")   
         }
     };
 
@@ -25,11 +25,7 @@ const ProductDetails = (props) => {
         getSingleProduct();
     }, [productId]);
 
-    /*   
-       if (!productData) {
-           return <div>Loading...</div>;
-       }
-    */
+    
     useEffect(() => { }, [productData]);
 
     return (

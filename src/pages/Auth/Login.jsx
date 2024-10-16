@@ -3,6 +3,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';     
 import Metapage from '../../Components/common/Metapage';
+import { API_ENDPOINTS } from '../../Shared/config';
 
 
 
@@ -49,7 +50,7 @@ const Login = ({ setIsAuthenticated }) => {
         }
 
         try {
-            const response = await axios.post('https://api.escuelajs.co/api/v1/auth/login', {
+            const response = await axios.post(API_ENDPOINTS.loginApi, {
                 email: formData.email,
                 password: formData.password,
             });
