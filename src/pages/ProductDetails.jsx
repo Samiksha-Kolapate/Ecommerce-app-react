@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import ProductDetailsCard from "../Container/ProductDetailsCard";
+import { API_ENDPOINTS } from "../Shared/config";
 
 const ProductDetails = (props) => {
 
@@ -12,7 +13,7 @@ const ProductDetails = (props) => {
     const getSingleProduct = async () => {
         try {
             // const response  = await axios.get(`https://fakestoreapi.com/products/${productId}`);
-            const response = await axios.get(`https://api.escuelajs.co/api/v1/products/${productId}`);
+            const response = await axios.get(API_ENDPOINTS.productApi + productId )
             console.log(response)
             setProductData(response.data);
         }

@@ -24,7 +24,6 @@ function App() {
 
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
 
-
     return (
         <>
             <Suspense fallback={<Spinner />}>

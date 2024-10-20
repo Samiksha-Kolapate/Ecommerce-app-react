@@ -6,7 +6,7 @@ import Footer from '../Components/Footer';
 const Layout = (props) => {
 
   return (
-    <div>
+    <>
       <Header
         isAuthenticated={props.isAuthenticated}
         setIsAuthenticated={props.setIsAuthenticated}
@@ -15,7 +15,7 @@ const Layout = (props) => {
         <Outlet />
       </main>
       <Footer />
-    </div>
+    </>
   );
 };
 

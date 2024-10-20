@@ -16,6 +16,7 @@ const Metapage = ({ title, description, keywords, author,children }) => {
     )
 }
 
+
 Metapage.defaultProps = {
     title: 'eShopping - shop now',
     description: 'Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - eShopping.in',

@@ -4,7 +4,7 @@ import { API_ENDPOINTS } from "../../Shared/config";
 export const productData = async (pagination) => {
     try {
       // const res = await axios.get("https://fakestoreapi.com/products");
-     const response = await axios.get(`https://api.escuelajs.co/api/v1/products?offset=0&limit=${pagination}`);
+     const response = await axios.get(API_ENDPOINTS.paginationApi + pagination);   
      return response.data
     } catch (error) {
       console.log(error);

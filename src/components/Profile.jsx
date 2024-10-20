@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+
+
 import { useNavigate } from "react-router-dom";
+import { API_ENDPOINTS } from "../Shared/config";
 
 const Profile = (props) => {
   const [profileData, setProfileData] = useState(null);
@@ -12,13 +15,12 @@ const Profile = (props) => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get("https://api.escuelajs.co/api/v1/auth/profile", {
+        const response = await axios.get(API_ENDPOINTS.profileApi, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         });
         setProfileData(response.data);
-        console.log(response.data)
       } catch (error) {
         console.error("Error fetching profile data", error);
       }
@@ -27,9 +29,12 @@ const Profile = (props) => {
     fetchProfile();
   }, [accessToken]);
 
+// useEffect = (() =>{
+
+// },[])
+
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('userEmail');
     props.setIsAuthenticated(false);
     setShowLogoutModal(false);
     navigate('/login');
